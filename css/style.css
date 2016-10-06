@@ -1,0 +1,507 @@
+@charset "UTF-8";
+
+/************************************** header **************************************/
+
+.header-container {
+    background: #455a64;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    padding-bottom: 20px;
+    z-index: 10005;
+}
+
+.search-header-container {
+    padding: 12px 12px 0 12px;
+}
+
+input.search-query {
+    padding: 8px 48px 8px 24px !important;
+}
+
+.header {
+	height: 48px;
+}
+
+.header .profile-icon {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    margin-top: 20px;
+    right: 20px;
+}
+
+.account-box {
+    display: none;
+    width: 300px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    background: #fff;
+    border: 1px solid #ccc;
+    border-color: rgba(0,0,0,.2);
+    color: #000;
+    padding: 16px;
+}
+
+.account-box-arrow {
+    display: none;
+    width: 0; 
+    height: 0; 
+    float: right;
+    margin-top: 63px;
+    margin-right: -324px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+}
+
+.search-header-container .account-box {
+    position: absolute;
+    right: 20px;
+    margin-right: 0;
+    margin-top: 50px;
+    z-index: 1000;
+}
+
+.search-header-container .account-box-arrow {
+    position: absolute;
+    right: 30px;
+    z-index: 100000;
+    margin-right: 0;
+    margin-top: 43px;
+}
+
+.account-box .email {
+    font-size: 11px;
+    color: #666;
+}
+
+.account-box .logout-button {
+    float: right;
+}
+
+.header .login-button {
+    margin-top: 20px;
+    right: 20px;
+    position: absolute;
+}
+
+.search-header-container .header .profile-icon {
+    margin-top: 0;
+}
+
+.search-header-container .header .login-button {
+    margin-top: 0;
+}
+
+.main-logo {
+	width: auto;
+	height: auto;
+	max-width: 600px;
+	margin: 0 auto;
+	padding-bottom: 20px;
+}
+
+.search-logo {
+    margin-left: 15px;
+    margin-right: 15px;
+    float: right
+}
+
+.search-logo img {
+    height: 36px
+}
+
+.devsite-search-form {
+    background: #607d8b;
+    border-radius: 2px;
+    display: inline-block;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    height: 36px;
+    margin: 6px 24px;
+    position: relative;
+    text-align: left;
+    transition: background .2s,-ms-flex .2s;
+    transition: background .2s,flex .2s;
+    vertical-align: top;
+    width: 200px;
+}
+
+.devsite-search-image {
+    color: #fff;
+    left: 24px;
+    position: absolute;
+    top: 6px;
+    transition: color .2s
+}
+.devsite-search-image::before {
+    content: 'search'
+}
+
+.devsite-search-enter {
+    color: #fff;
+    right: 0;
+    position: absolute;
+    top: 0;
+    padding: 6px 8px 6px 8px;
+    border-radius: 0 2px 2px 0;
+    transition: color .2s;
+    background-color: tomato;
+    border: none;
+    width: 40px;
+
+}
+
+.devsite-search-enter::before {
+    content: 'send'
+}
+
+.devsite-search-enter:hover {
+    background-color: mediumpurple;
+}
+
+.devsite-search-active .devsite-search-image {
+    color: #757575
+}
+input.devsite-search-field {
+    background: 0;
+    border: 0;
+    color: #fff;
+    height: 36px;
+    padding: 8px 48px 8px 72px;
+    transition: color .2s;
+    width: 100%
+}
+.devsite-search-active .devsite-search-field {
+    color: #212121
+}
+input.devsite-search-field:focus {
+    border: 0;
+    padding-bottom: 8px
+}
+.devsite-search-form::-webkit-input-placeholder {
+    color: #fff;
+    transition: color .2s
+}
+.devsite-search-form:-moz-placeholder {
+    color: #fff;
+    transition: color .2s
+}
+.devsite-search-form::-moz-placeholder {
+    color: #fff;
+    transition: color .2s
+}
+.devsite-search-form:-ms-input-placeholder {
+    color: #fff;
+    transition: color .2s
+}
+.devsite-search-active .devsite-search-form::-webkit-input-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form:-moz-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form::-moz-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form:-ms-input-placeholder {
+    color: #757575
+}
+.devsite-search-button {
+    margin: 12px 16px 12px 0
+}
+.devsite-search-button::before {
+    content: 'search'
+}
+.devsite-home-page-search-wrapper,
+.devsite-home-page-search-wrapper.devsite-search-active {
+    border: 0;
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 24px;
+    position: relative;
+    width: 100%
+}
+.devsite-search-form,
+.devsite-search-form:hover {
+    background: #fff;
+    display: block;
+    margin: 0;
+    width: 100%
+}
+.devsite-search-form::-webkit-input-placeholder {
+    color: #212121
+}
+.devsite-search-form:-moz-placeholder {
+    color: #212121
+}
+.devsite-search-form::-moz-placeholder {
+    color: #212121
+}
+.devsite-search-form:-ms-input-placeholder {
+    color: #212121
+}
+.devsite-search-active .devsite-search-form::-webkit-input-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form:-moz-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form::-moz-placeholder {
+    color: #757575
+}
+.devsite-search-active .devsite-search-form:-ms-input-placeholder {
+    color: #757575
+}
+input.devsite-search-field,
+.devsite-search-image {
+    color: #212121
+}
+
+.devsite-search-form, .devsite-search-form:hover {
+    background: #fff;
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+.devsite-searchbox {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+/************************************** body *****************************************/
+
+body {
+    background: rgb(246, 246, 246);
+}
+
+.body404 {
+    background-color: white;
+    overflow: hidden;
+}
+
+/************************************** colours **************************************/
+.color-gainsboro {
+	background-color: gainsboro;
+}
+
+/************************************* containers ************************************/
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.container:before,
+.container:after {
+    content: " ";
+    display: table;
+}
+.container:after {
+    clear: both;
+}
+@media (min-width: 544px) {
+    .container {
+        width: 576px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 940px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px;
+    }
+}
+
+/**************************** search results *************************************/
+a.result-link-name {
+    font-size: 1.3em;
+    color: blueviolet;
+    text-decoration: none;
+    line-height: 18px
+}
+
+a.result-link-name:hover{
+    text-decoration: underline;
+}
+
+p.result-link-url {
+    margin-bottom: 0;
+    color: olive;
+    font-size: 1em;
+    line-height: 18px
+}
+
+p.result-link-description {
+    font-size: 1em;
+    margin-bottom: 0;
+    padding-right: 80px;
+    line-height: 18px
+}
+
+.search-result {
+    margin-bottom: 24px;
+}
+
+.search-results-container {
+    padding: 36px 0 0 0;
+}
+
+/****************************************** pagination ******************************/
+
+.pagination {
+    padding: 0;
+}
+
+.pagination li {
+    display: inline;
+    padding: 8px;
+}
+
+.pagination a {
+    font-size: 1.4em;
+    text-decoration: none;
+    color: blue;
+}
+
+/********************************************* misc **************************************/
+
+.query-count-table {
+    padding: 16px;
+}
+
+.mdl-card__media .mdl-data-table {
+    border: 0;
+}
+
+.mdl-card__actions.mdl-card--border {
+    border: 0;
+}
+
+.card-weather {
+    background-color: white;
+    height: 100%;
+}
+
+.card-weather .current .city {
+    font-size: 1.5em;
+    color: white;
+    margin-top: 8px;
+    font-weight: 200;
+}
+
+.card-weather .current .devider {
+    content: "";
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    margin: 12px 0 8px 2px;
+}
+
+.card-weather .current .desc {
+    font-size: 0.8em;
+    color: white;
+    padding-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.card-weather .current .temp {
+    font-size: 2em;
+    color: white;
+    font-weight: 100;
+    padding-top: 1em;
+}
+
+.card-weather .current .icon img {
+    max-width: 80px;
+    max-width: 80px;
+    float: right;
+}
+
+.card-weather .current {
+    padding: 16px;
+    height: 70%;
+    background-image: url("/images/bg_weather_toronto.png");
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+}
+
+.card-weather .high-low {
+    padding: 16px;
+}
+
+.card-weather .high-low div {
+    display: inline;
+}
+
+.card-weather .high-low .icon img {
+    max-height: 50px;
+}
+
+
+.mdl-card-wide {
+    min-width: 512px;
+}
+
+.mdl-card {
+    min-width: 256px;
+    min-height: 256px;
+}
+
+.mdl-card__actions {
+    position: absolute;
+    bottom: 0
+}
+
+.gif404 {
+    position: absolute;
+    height: 100%;
+}
+
+.text404 {
+    font-size: 20em;
+}
+
+.desc404 {
+    font-size: 1.5em;
+    width: 80%;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.container404 {
+    position: absolute;
+    right: 0;
+    top: calc(40%);
+}
+
+.container500 {
+    background-image: url("/images/500.gif");
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+}
+
+.text500 {
+    color: white;
+    font-size: 2em;
+    position: absolute;
+    bottom: 60px;
+    text-align: center;
+    width: 100%;
+}
