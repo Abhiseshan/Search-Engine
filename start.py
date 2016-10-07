@@ -9,9 +9,6 @@ import urlparse
 import httplib2
 from apiclient.discovery import build
 
-
-#Remove global user
-
 temp_redirect_url = None
 
 session_opts = {
@@ -155,4 +152,4 @@ def get_user_details():
 	return user
 
 
-run(host='localhost', port=8080, debug=True, app=app)
+run(host='192.168.0.14', port=8080, debug=True, app=app)

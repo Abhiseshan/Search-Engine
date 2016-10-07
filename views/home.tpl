@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			%end
-			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
+			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col screen-md">
 				<div class="mdl-card__media card-weather">
 					<div class="current">
 						<div class="city">Toronto</div>
