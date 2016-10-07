@@ -25,27 +25,18 @@ session_opts = {
 
 app = SessionMiddleware(bottle.app(), session_opts)
 
-@route('/test')
-def test():
-  s = bottle.request.environ.get('beaker.session')
-  s['test'] = s.get('test',0) + 1
-  s.save()
-  return 'Test counter: %d' % s['test']
-
 @route('/home')
 @route('/')
 def go_to_home():
 	weather = w.getWeatherInfo()
-	s = bottle.request.environ.get('beaker.session')
-	user = s.get('user',{})
+	user = get_user_details()
 	params = weather.copy()
 	params.update(user)
 	return template('home.tpl', **params)
 
 @route('/search')
 def search():
-	s = bottle.request.environ.get('beaker.session')
-	params = s.get('user',{})
+	params = get_user_details()
 	query = request.query.q
 	query = query.strip()
 	if (query == ''):
@@ -115,8 +106,7 @@ def auth_return():
 
 @route('/top_keywords')
 def top_keywords():
-	s = bottle.request.environ.get('beaker.session')
-	user = s.get('user',{})	
+	user = get_user_details()
 	db.update_entry("Top", 1)
 	db.update_entry("Keywords", 1)
 	s = bottle.request.environ.get('beaker.session')
@@ -141,5 +131,17 @@ def error404(error):
 @error(500)
 def error500(error):
    	return template('500.tpl')
+
+def get_user_details()
+	s = bottle.request.environ.get('beaker.session')
+	user = s.get('user',{})	
+
+	if not user:
+		user[logged_in] = False
+	else:
+		user[logged_in] = True
+
+	return user
+
 
 run(host='localhost', port=8080, debug=True, app=app)
