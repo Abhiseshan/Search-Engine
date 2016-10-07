@@ -33,7 +33,7 @@ def get_top_keywords():
 	conn = sqlite3.connect('db/keyword_count.db')
 	c = conn.cursor()
 
-	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 20')
+	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 10')
 	result = c.fetchall()
 	
 	conn.commit()

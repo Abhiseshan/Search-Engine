@@ -43,12 +43,14 @@ def search():
 		params.update(w.getWeatherInfo())
 		return template('home.tpl', **params)
 	elif " " not in query:
-		db.update_entry(query, 1)
+		if params[logged_in]:
+			db.update_entry(query, 1)
 		params['query'] = query
 		return template('search.tpl', **params)
 	elif "top keywords" == query.lower():
-		db.update_entry("Top", 1)
-		db.update_entry("Keywords", 1)
+		if params[logged_in]:
+			db.update_entry("Top", 1)
+			db.update_entry("Keywords", 1)
 		params['query'] = query
 		return template('top_keywords.tpl', **params)
 	else:
@@ -56,7 +58,8 @@ def search():
 		for q in querys:
 			q = q.strip()
 		queryCount = collections.Counter(querys)
-		db.add_list_to_db(queryCount)
+		if params[logged_in]:
+			db.add_list_to_db(queryCount)
 		params['querys']=queryCount
 		params['query']=query
 		return template('multisearch.tpl', **params)
@@ -106,11 +109,10 @@ def auth_return():
 
 @route('/top_keywords')
 def top_keywords():
-	user = get_user_details()
-	db.update_entry("Top", 1)
-	db.update_entry("Keywords", 1)
-	s = bottle.request.environ.get('beaker.session')
-	params = s.get('user',{})
+	params = get_user_details()
+	if params[logged_in]:
+		db.update_entry("Top", 1)
+		db.update_entry("Keywords", 1)
 	params['query'] = "Top Keywords"
 	return template('top_keywords.tpl', **params)
 
@@ -131,6 +133,9 @@ def error404(error):
 @error(500)
 def error500(error):
    	return template('500.tpl')
+
+
+#helper functions that do not do any type of routing 
 
 def get_user_details():
 	s = bottle.request.environ.get('beaker.session')

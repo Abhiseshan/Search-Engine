@@ -151,7 +151,7 @@ input.search-query {
     background-color: tomato;
     border: none;
     width: 40px;
-
+    height: 100%
 }
 
 .devsite-search-enter::before {
@@ -382,6 +382,10 @@ p.result-link-description {
 
 .query-count-table {
     padding: 16px;
+}
+
+.mdl-card__media {
+    background-color: white;
 }
 
 .mdl-card__media .mdl-data-table {
