@@ -36,7 +36,7 @@
 					</thead>
 					<tbody>
 						%import database as db
-						%keywords = db.get_top_keywords()
+						%keywords = db.get_top_keywords(id)
 						%for word in keywords:
 						<tr>
 							<td class="mdl-data-table__cell--non-numeric">{{word[0]}}</td>

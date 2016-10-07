@@ -12,8 +12,6 @@ from apiclient.discovery import build
 
 #Remove global user
 
-db.recreate_db()
-
 temp_redirect_url = None
 
 session_opts = {
@@ -24,6 +22,11 @@ session_opts = {
 }
 
 app = SessionMiddleware(bottle.app(), session_opts)
+
+@route('/usertest')
+def user_params_test():
+	user = get_user_details()
+	return user
 
 @route('/home')
 @route('/')
@@ -43,14 +46,14 @@ def search():
 		params.update(w.getWeatherInfo())
 		return template('home.tpl', **params)
 	elif " " not in query:
-		if params[logged_in]:
-			db.update_entry(query, 1)
+		if params['logged_in']:
+			db.update_entry(query, 1, params['id'])
 		params['query'] = query
 		return template('search.tpl', **params)
 	elif "top keywords" == query.lower():
-		if params[logged_in]:
-			db.update_entry("Top", 1)
-			db.update_entry("Keywords", 1)
+		if params['logged_in']:
+			db.update_entry("Top", 1, params['id'])
+			db.update_entry("Keywords", 1, params['id'])
 		params['query'] = query
 		return template('top_keywords.tpl', **params)
 	else:
@@ -58,8 +61,8 @@ def search():
 		for q in querys:
 			q = q.strip()
 		queryCount = collections.Counter(querys)
-		if params[logged_in]:
-			db.add_list_to_db(queryCount)
+		if params['logged_in']:
+			db.add_list_to_db(queryCount, params['id'])
 		params['querys']=queryCount
 		params['query']=query
 		return template('multisearch.tpl', **params)
@@ -101,6 +104,9 @@ def auth_return():
   	s['user'] = user_document
   	s.save()
 
+  	#create a new db (if it does not exist) file for the user
+  	db.create_db(user_document['id'])
+
   	if temp_redirect_url is None:
 		bottle.redirect("/")
 
@@ -110,9 +116,9 @@ def auth_return():
 @route('/top_keywords')
 def top_keywords():
 	params = get_user_details()
-	if params[logged_in]:
-		db.update_entry("Top", 1)
-		db.update_entry("Keywords", 1)
+	if params['logged_in']:
+		db.update_entry("Top", 1, params['id'])
+		db.update_entry("Keywords", 1, params['id'])
 	params['query'] = "Top Keywords"
 	return template('top_keywords.tpl', **params)
 
