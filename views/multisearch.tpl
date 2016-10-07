@@ -25,6 +25,7 @@
 					</tbody>
 				</table>
 			</div>
+			%if logged_in:
 			<div class="query-count-table mdl-cell--4-col" style="margin: 0 auto">
 				<table class="mdl-data-table mdl-js-data-table" style="width: 100%" id="results">
 					<thead>
@@ -45,6 +46,7 @@
 					</tbody>
 				</table>
 			</div>
+			%end
 		</div>
 	</div>
 </body>

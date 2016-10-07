@@ -132,14 +132,14 @@ def error404(error):
 def error500(error):
    	return template('500.tpl')
 
-def get_user_details()
+def get_user_details():
 	s = bottle.request.environ.get('beaker.session')
 	user = s.get('user',{})	
 
 	if not user:
-		user[logged_in] = False
+		user.update({'logged_in': False})
 	else:
-		user[logged_in] = True
+		user.update({'logged_in': True})
 
 	return user
 
