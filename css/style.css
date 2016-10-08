@@ -514,6 +514,19 @@ p.result-link-description {
     width: 100%;
 }
 
+.footer {
+    position: fixed;
+    padding: 8px;
+    bottom: 0
+}
+
+.footer a {
+    color: grey;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px;
+}
+
 /********************************************* screen response **************************************/
 
 @media (min-width: 544px) {

@@ -152,4 +152,4 @@ def get_user_details():
 	return user
 
 
-run(host='192.168.0.14', port=8080, debug=True, app=app)
+run(host='localhost', port=8080, debug=True, app=app)

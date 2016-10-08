@@ -32,5 +32,6 @@
 			<!--TODO Make graphic to log into the page -->
 		</div>
 	</div>
+	% include('footer.tpl')
 </body>
 </html>
