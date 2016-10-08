@@ -2,7 +2,7 @@
 
 <html lang="en">
 % include('head.tpl')
-<body>
+<body class="home-body" style="background: url({{bg_url}}); background-size: cover; background-repeat: no-repeat; background-position: center center;">
 	<div class="header-container">
 		<div class="header">
 			<!--TODO Handle case of no picture available -->
@@ -18,20 +18,23 @@
 				<a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored login-button" href="/login">Login</a>
 			%end
 		</div>
+	</div>
+
+	<div class="home-container">
 		<div class="main-logo">
-				<img src="images/placeholder.png" />
+			<img src="images/placeholder.png" />
 		</div>
 		<div class="devsite-search-wrapper devsite-home-page-search-wrapper">
 			<form class="devsite-search-form" action="search" method="get">
 			   	<div id="searchbox" class="devsite-searchbox">
-			   		<input placeholder="Search" type="text" class="devsite-search-field devsite-search-query" name="q" value="" autocomplete="off">
-		        	<div class="devsite-search-image material-icons"></div>
-		        	<input type="submit" value="send" class="devsite-search-enter material-icons">
+			   		<input placeholder="Search" type="text" class="devsite-search-field devsite-search-query search-query" name="q" value="" autocomplete="off">
+		        	<input type="submit" value="search" class="devsite-search-enter material-icons">
 			    </div>
 		    </form>
 		</div>
 	</div>
 
+	<!--
 	<div class="container">
 		<div class="mdl-grid">
 			%if logged_in:
@@ -82,6 +85,10 @@
 			</div>
 		</div>
 	</div>
+	-->
+
+	<div class="img-credits">{{bg_copywright}}</div>
+
 	% include('footer.tpl')
 </body>
 </html>

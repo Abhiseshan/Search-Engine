@@ -3,6 +3,7 @@ import bottle
 import collections
 import database as db
 import weather as w
+import background as bg
 from beaker.middleware import SessionMiddleware
 from oauth2client.client import flow_from_clientsecrets
 import urlparse
@@ -28,10 +29,12 @@ def user_params_test():
 @route('/home')
 @route('/')
 def go_to_home():
-	weather = w.getWeatherInfo()
+	#weather = w.getWeatherInfo()
+	#params = weather.copy()
 	user = get_user_details()
-	params = weather.copy()
 	params.update(user)
+	background = bg.getBackground()
+	params.update(background)
 	return template('home.tpl', **params)
 
 @route('/search')
@@ -40,19 +43,14 @@ def search():
 	query = request.query.q
 	query = query.strip()
 	if (query == ''):
-		params.update(w.getWeatherInfo())
+		#params.update(w.getWeatherInfo())
+		params.update(bg.getBackground())
 		return template('home.tpl', **params)
 	elif " " not in query:
 		if params['logged_in']:
 			db.update_entry(query, 1, params['id'])
 		params['query'] = query
 		return template('search.tpl', **params)
-	elif "top keywords" == query.lower():
-		if params['logged_in']:
-			db.update_entry("Top", 1, params['id'])
-			db.update_entry("Keywords", 1, params['id'])
-		params['query'] = query
-		return template('top_keywords.tpl', **params)
 	else:
 		querys = query.split(' ')
 		for q in querys:
@@ -110,14 +108,11 @@ def auth_return():
 	bottle.redirect(temp_redirect_url)
 
 
-@route('/top_keywords')
-def top_keywords():
+@route('/history')
+def history():
 	params = get_user_details()
-	if params['logged_in']:
-		db.update_entry("Top", 1, params['id'])
-		db.update_entry("Keywords", 1, params['id'])
-	params['query'] = "Top Keywords"
-	return template('top_keywords.tpl', **params)
+	params['query'] = "History"
+	return template('histroy.tpl', **params)
 
 #Static def for files in folders
 @route('/<folder:path>/<filename:path>')
