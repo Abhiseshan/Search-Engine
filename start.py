@@ -31,8 +31,8 @@ def user_params_test():
 def go_to_home():
 	#weather = w.getWeatherInfo()
 	#params = weather.copy()
-	user = get_user_details()
-	params.update(user)
+	params = get_user_details()
+	#params.update(user)
 	background = bg.getBackground()
 	params.update(background)
 	return template('home.tpl', **params)
