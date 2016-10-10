@@ -8,6 +8,11 @@ from oauth2client.client import flow_from_clientsecrets
 import urlparse
 import httplib2
 from apiclient.discovery import build
+from crawler import crawler
+
+crawler = crawler(None, "urls.txt")
+resolved_inverted_index = crawler.get_resolved_inverted_index()
+inverted_index = crawler.get_inverted_index()
 
 #Recreates the database when the session is started.
 db.recreate_db()
@@ -50,6 +55,12 @@ def search():
 	elif " " not in query:
 		db.update_entry(query, 1)
 		params['query'] = query
+
+		if query in resolved_inverted_index.keys():
+			params['results'] = resolved_inverted_index[query]
+		else:
+			params['results'] = None
+
 		return template('search.tpl', **params)
 	#if we detect that the phrase top keywords is present, we take them to a page displaying top keywords
 	elif "top keywords" == query.lower():

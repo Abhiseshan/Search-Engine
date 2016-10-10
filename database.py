@@ -83,3 +83,11 @@ def recreate_db():
 	c.execute('CREATE TABLE keycount (keyword text, count integer)')
 	conn.commit()
 	c.close()
+
+def fetch_url_title(url):
+    database = sqlite3.connect('database.db')
+    c = database.cursor()
+    c.execute('SELECT doc_url_title FROM DOC_INFO WHERE doc_url=?', (url,))
+    title = c.fetchone()
+    c.close()
+    return title[0]
