@@ -1,16 +1,16 @@
 import sqlite3
 
-#creates a databse neamed keyword_count
-def create_db():
-	conn = sqlite3.connect('db/keyword_count.db')
+def create_db(db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
-	c.execute('CREATE TABLE keycount (keyword text, count integer)')
+	c.execute('CREATE TABLE IF NOT EXISTS keycount (keyword text, count integer)')
 	conn.commit()
 	c.close()
 
-#updates a single entry into the database
-def update_entry(keyword, count):
-	conn = sqlite3.connect('db/keyword_count.db')
+def update_entry(keyword, count, db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
 
 	c.execute('SELECT * FROM keycount WHERE keyword=?', (keyword,))
@@ -31,12 +31,28 @@ def update_entry(keyword, count):
 	conn.commit()
 	c.close()
 
-#Gets a list of top 20 keywords
-def get_top_keywords():
-	conn = sqlite3.connect('db/keyword_count.db')
+def update_entry_multi(keyword, count, c):
+	c.execute('SELECT * FROM keycount WHERE keyword=?', (keyword,))
+
+	result = c.fetchall()
+
+	if not result:
+		#insert into table
+		c.execute('INSERT INTO keycount (keyword, count) VALUES (?,?)', (keyword, count))
+	else:
+		#update it
+		if not len(result) == 1:
+			print "oops an error has occured"
+		else:
+			count += int(result[0][1])
+			c.execute('UPDATE keycount SET count=? WHERE keyword=?',(count, keyword))
+
+def get_top_keywords(db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
 
-	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 20')
+	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 10')
 	result = c.fetchall()
 	
 	conn.commit()
@@ -44,9 +60,9 @@ def get_top_keywords():
 
 	return result
 
-#Gets a list of top 3 keywords to use as a preview in the home page
-def get_top_keywords_preview():
-	conn = sqlite3.connect('db/keyword_count.db')
+def get_top_keywords_preview(db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
 
 	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 3')
@@ -57,16 +73,20 @@ def get_top_keywords_preview():
 
 	return result
 
-#Adds a list of items into the db (multi search querys)
-def add_list_to_db(list):
-	#TODO make the connection to the db only once and add the elements and close the db at the end of the function
-
+<<<<<<< HEAD
+def add_list_to_db(list, db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
 	for item in list:
-		update_entry(item, list[item])
+		update_entry_multi(item, list[item], c)
 
-#Prints the whole databse for debugging purposes 
-def print_db():
-	conn = sqlite3.connect('db/keyword_count.db')
+	conn.commit()
+	c.close()
+
+def print_db(db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
 
 	for row in c.execute('SELECT * FROM keycount ORDER BY count DESC'):
@@ -75,9 +95,9 @@ def print_db():
 	conn.commit()
 	c.close()
 
-#deletes the table and creates a new one - used when the session is restarted
-def recreate_db():
-	conn = sqlite3.connect('db/keyword_count.db')
+def recreate_db(db_id):
+	db = 'db/' + db_id + '.db'
+	conn = sqlite3.connect(db)
 	c = conn.cursor()
 	c.execute('DROP TABLE keycount')
 	c.execute('CREATE TABLE keycount (keyword text, count integer)')

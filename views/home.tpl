@@ -5,7 +5,8 @@
 <body>
 	<div class="header-container">
 		<div class="header">
-			%if defined('picture'):
+			<!--TODO Handle case of no picture available -->
+			%if logged_in:
 				<img src="{{picture}}" class="profile-icon" id="profile-icon" onclick="toggle_visibility('account-box');toggle_visibility('account-box-arrow');"/>
 				<div class="account-box" id="account-box">
 					<a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored logout-button" href="/logout">Logout</a>
@@ -33,6 +34,7 @@
 
 	<div class="container">
 		<div class="mdl-grid">
+			%if logged_in:
 			<div class="mdl-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
 				<div class="mdl-card__media">
 					<table class=" mdl-data-table mdl-js-data-table" style="width: 100%" id="results">
@@ -44,7 +46,7 @@
 						</thead>
 						<tbody>
 							%import database as db
-							%keywords = db.get_top_keywords_preview()
+							%keywords = db.get_top_keywords_preview(id)
 							%for word in keywords:
 							<tr>
 								<td class="mdl-data-table__cell--non-numeric">{{word[0]}}</td>
@@ -60,7 +62,8 @@
 				    </a>
 				</div>
 			</div>
-			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
+			%end
+			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col screen-md">
 				<div class="mdl-card__media card-weather">
 					<div class="current">
 						<div class="city">Toronto</div>
@@ -79,5 +82,6 @@
 			</div>
 		</div>
 	</div>
+	% include('footer.tpl')
 </body>
 </html>

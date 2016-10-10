@@ -8,16 +8,7 @@ from oauth2client.client import flow_from_clientsecrets
 import urlparse
 import httplib2
 from apiclient.discovery import build
-from crawler import crawler
 
-crawler = crawler(None, "urls.txt")
-resolved_inverted_index = crawler.get_resolved_inverted_index()
-inverted_index = crawler.get_inverted_index()
-
-#Recreates the database when the session is started.
-db.recreate_db()
-
-#Cookie Setup Options
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './data',
@@ -27,14 +18,12 @@ session_opts = {
 
 app = SessionMiddleware(bottle.app(), session_opts)
 
-
 #Load the home page with weather and user data
 @route('/home')
 @route('/')
 def go_to_home():
 	weather = w.getWeatherInfo()
-	s = bottle.request.environ.get('beaker.session')
-	user = s.get('user',{})
+	user = get_user_details()
 	params = weather.copy()
 	params.update(user)
 	return template('home.tpl', **params)
@@ -42,8 +31,7 @@ def go_to_home():
 #Handles all search querys
 @route('/search')
 def search():
-	s = bottle.request.environ.get('beaker.session')
-	params = s.get('user',{})
+	params = get_user_details()
 	query = request.query.q
 	query = query.strip()
 
@@ -53,7 +41,8 @@ def search():
 		return template('home.tpl', **params)
 	#if we detect that it is a single query
 	elif " " not in query:
-		db.update_entry(query, 1)
+		if params['logged_in']:
+			db.update_entry(query, 1, params['id'])
 		params['query'] = query
 
 		if query in resolved_inverted_index.keys():
@@ -64,8 +53,9 @@ def search():
 		return template('search.tpl', **params)
 	#if we detect that the phrase top keywords is present, we take them to a page displaying top keywords
 	elif "top keywords" == query.lower():
-		db.update_entry("Top", 1)
-		db.update_entry("Keywords", 1)
+		if params['logged_in']:
+			db.update_entry("Top", 1, params['id'])
+			db.update_entry("Keywords", 1, params['id'])
 		params['query'] = query
 		return template('top_keywords.tpl', **params)
 	#Else we know it is a multi query string
@@ -74,7 +64,8 @@ def search():
 		for q in querys:
 			q = q.strip()
 		queryCount = collections.Counter(querys)
-		db.add_list_to_db(queryCount)
+		if params['logged_in']:
+			db.add_list_to_db(queryCount, params['id'])
 		params['querys']=queryCount
 		params['query']=query
 		return template('multisearch.tpl', **params)
@@ -119,6 +110,9 @@ def auth_return():
   	s['user'] = user_document
   	s.save()
 
+  	#create a new db (if it does not exist) file for the user
+  	db.create_db(user_document['id'])
+
   	if temp_redirect_url is None:
 		bottle.redirect("/")
 
@@ -127,12 +121,10 @@ def auth_return():
 #When loads the top keywords page when it is requested
 @route('/top_keywords')
 def top_keywords():
-	s = bottle.request.environ.get('beaker.session')
-	user = s.get('user',{})	
-	db.update_entry("Top", 1)
-	db.update_entry("Keywords", 1)
-	s = bottle.request.environ.get('beaker.session')
-	params = s.get('user',{})
+	params = get_user_details()
+	if params['logged_in']:
+		db.update_entry("Top", 1, params['id'])
+		db.update_entry("Keywords", 1, params['id'])
 	params['query'] = "Top Keywords"
 	return template('top_keywords.tpl', **params)
 
@@ -155,5 +147,20 @@ def error404(error):
 @error(500)
 def error500(error):
    	return template('500.tpl')
+
+
+#helper functions that do not do any type of routing 
+
+def get_user_details():
+	s = bottle.request.environ.get('beaker.session')
+	user = s.get('user',{})	
+
+	if not user:
+		user.update({'logged_in': False})
+	else:
+		user.update({'logged_in': True})
+
+	return user
+
 
 run(host='localhost', port=8080, debug=True, app=app)

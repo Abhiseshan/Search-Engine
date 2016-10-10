@@ -103,6 +103,10 @@ input.search-query {
 	padding-bottom: 20px;
 }
 
+.main-logo img {
+    max-width: 100%;
+}
+
 .search-logo {
     margin-left: 15px;
     margin-right: 15px;
@@ -151,7 +155,7 @@ input.search-query {
     background-color: tomato;
     border: none;
     width: 40px;
-
+    height: 100%
 }
 
 .devsite-search-enter::before {
@@ -223,7 +227,6 @@ input.devsite-search-field:focus {
     max-width: 800px;
     padding: 0 24px;
     position: relative;
-    width: 100%
 }
 .devsite-search-form,
 .devsite-search-form:hover {
@@ -327,6 +330,7 @@ body {
     }
 }
 
+
 /**************************** search results *************************************/
 a.result-link-name {
     font-size: 1.3em;
@@ -382,6 +386,10 @@ p.result-link-description {
 
 .query-count-table {
     padding: 16px;
+}
+
+.mdl-card__media {
+    background-color: white;
 }
 
 .mdl-card__media .mdl-data-table {
@@ -504,4 +512,35 @@ p.result-link-description {
     bottom: 60px;
     text-align: center;
     width: 100%;
+}
+
+.footer {
+    position: fixed;
+    padding: 8px;
+    bottom: 0
+}
+
+.footer a {
+    color: grey;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px;
+}
+
+/********************************************* screen response **************************************/
+
+@media (min-width: 544px) {
+    .screen-sm {
+        display: none;
+    }
+}
+@media (max-width: 544px) {
+    .screen-md {
+        display: none;
+    }
+}
+@media (max-width: 992px) {
+    .screen-lg {
+        display: none;
+    }
 }

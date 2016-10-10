@@ -7,6 +7,7 @@
 
 	<div class="search-results-container">
 		<div class="mdl-grid">
+			%if logged_in:
 			<div class="mdl-cell--5-col mdl-cell--1-offset query-count-table">
 				<table class="mdl-data-table mdl-js-data-table" style="width: 100%" id="results">
 					<thead>
@@ -17,7 +18,7 @@
 					</thead>
 					<tbody>
 						%import database as db
-						%keywords = db.get_top_keywords()
+						%keywords = db.get_top_keywords(id)
 						%for word in keywords:
 						<tr>
 							<td class="mdl-data-table__cell--non-numeric">{{word[0]}}</td>
@@ -27,7 +28,10 @@
 					</tbody>
 				</table>
 			</div>
+			%end
+			<!--TODO Make graphic to log into the page -->
 		</div>
 	</div>
+	% include('footer.tpl')
 </body>
 </html>
