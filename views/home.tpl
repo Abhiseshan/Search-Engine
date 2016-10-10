@@ -22,7 +22,7 @@
 
 	<div class="home-container">
 		<div class="main-logo">
-			<img src="images/placeholder.png" />
+				<img src="images/banora.png" />
 		</div>
 		<div class="devsite-search-wrapper devsite-home-page-search-wrapper">
 			<form class="devsite-search-form" action="search" method="get">
@@ -33,59 +33,6 @@
 		    </form>
 		</div>
 	</div>
-
-	<!--
-	<div class="container">
-		<div class="mdl-grid">
-			%if logged_in:
-			<div class="mdl-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
-				<div class="mdl-card__media">
-					<table class=" mdl-data-table mdl-js-data-table" style="width: 100%" id="results">
-						<thead>
-							<tr>
-								<th class="mdl-data-table__cell--non-numeric">Top Keywords</th>
-		      					<th class="mdl-data-table__cell--non-numeric">Count</th>
-							</tr>
-						</thead>
-						<tbody>
-							%import database as db
-							%keywords = db.get_top_keywords_preview(id)
-							%for word in keywords:
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">{{word[0]}}</td>
-								<td class="mdl-data-table__cell--non-numeric">{{word[1]}}</td>
-							</tr>
-							%end
-						</tbody>
-					</table>
-				</div>
-				<div class="mdl-card__actions mdl-card--border">
-				    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/top_keywords">
-				      View all
-				    </a>
-				</div>
-			</div>
-			%end
-			<div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col screen-md">
-				<div class="mdl-card__media card-weather">
-					<div class="current">
-						<div class="city">Toronto</div>
-						<div class="icon"><img src="/images/ic_weather/{{icon}}.png"></div>
-						<div class="devider"></div>
-						<div class="desc">{{desc}}</div>
-						<div class="temp">{{temp}}</div>
-					</div>
-					<div class="high-low">
-						<div class="icon"><img src="/images/ic_weather/temp_high.png"></div>
-						<div class="temp">{{temp_max}}</div>
-						<div class="icon"><img src="/images/ic_weather/temp_low.png"></div>		
-						<div class="temp">{{temp_min}}</div>				
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 
 	<div class="img-credits">{{bg_copywright}}</div>
 

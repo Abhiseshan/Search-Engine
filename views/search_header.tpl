@@ -2,7 +2,7 @@
 	<div class="header mdl-grid">
 		<div class="mdl-cell--1-col">
 			<div class="search-logo">
-				<a href="/"><img src="images/placeholder_small.png" /></a>
+				<a href="/"><img src="images/banora_small.png" /></a>
 			</div>
 		</div>
 		<div class="mdl-cell--6-col">
