@@ -10,21 +10,16 @@
 			<div class="mdl-cell--6-col mdl-cell--1-offset">
 			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
 <%
-				from collections import namedtuple
-				ResultStruct = namedtuple("ResultStruct", "name link description")
-				searchResults = []
-				#for testing purposes only
-				searchResults.append(ResultStruct("Test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-				searchResults.append(ResultStruct("Test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-				searchResults.append(ResultStruct("Test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-				searchResults.append(ResultStruct("test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-				searchResults.append(ResultStruct("Test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-				searchResults.append(ResultStruct("Test", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
+			import database as db
 
-				for result in searchResults:
-					params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
+			if results is not None:
+				description = ""
+
+				for result in results:
+					params = {'link_name':db.fetch_url_title(result), 'link_url':result, 'link_description':description}
 					include('search_result.tpl', **params)
 				end
+			end
 %>
 			</div>
 			%if logged_in:

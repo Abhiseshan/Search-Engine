@@ -19,7 +19,7 @@
 			%end
 		</div>
 		<div class="main-logo">
-				<img src="images/placeholder.png" />
+				<img src="images/banora.png" />
 		</div>
 		<div class="devsite-search-wrapper devsite-home-page-search-wrapper">
 			<form class="devsite-search-form" action="search" method="get">

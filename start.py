@@ -9,8 +9,6 @@ import urlparse
 import httplib2
 from apiclient.discovery import build
 
-temp_redirect_url = None
-
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './data',
@@ -20,11 +18,7 @@ session_opts = {
 
 app = SessionMiddleware(bottle.app(), session_opts)
 
-@route('/usertest')
-def user_params_test():
-	user = get_user_details()
-	return user
-
+#Load the home page with weather and user data
 @route('/home')
 @route('/')
 def go_to_home():
@@ -34,25 +28,37 @@ def go_to_home():
 	params.update(user)
 	return template('home.tpl', **params)
 
+#Handles all search querys
 @route('/search')
 def search():
 	params = get_user_details()
 	query = request.query.q
 	query = query.strip()
+
+	#empty query, return back to the home
 	if (query == ''):
 		params.update(w.getWeatherInfo())
 		return template('home.tpl', **params)
+	#if we detect that it is a single query
 	elif " " not in query:
 		if params['logged_in']:
 			db.update_entry(query, 1, params['id'])
 		params['query'] = query
+
+		if query in resolved_inverted_index.keys():
+			params['results'] = resolved_inverted_index[query]
+		else:
+			params['results'] = None
+
 		return template('search.tpl', **params)
+	#if we detect that the phrase top keywords is present, we take them to a page displaying top keywords
 	elif "top keywords" == query.lower():
 		if params['logged_in']:
 			db.update_entry("Top", 1, params['id'])
 			db.update_entry("Keywords", 1, params['id'])
 		params['query'] = query
 		return template('top_keywords.tpl', **params)
+	#Else we know it is a multi query string
 	else:
 		querys = query.split(' ')
 		for q in querys:
@@ -64,6 +70,7 @@ def search():
 		params['query']=query
 		return template('multisearch.tpl', **params)
 
+#Handles the login
 @route('/login')
 def login():
 	flow = flow_from_clientsecrets('client_secrets.json', 
@@ -73,12 +80,14 @@ def login():
 	auth_uri = flow.step1_get_authorize_url()
 	bottle.redirect(str(auth_uri))
 
+#handles the logout 
 @route('/logout')
 def logout():
 	s = bottle.request.environ.get('beaker.session')
 	s.invalidate()
 	bottle.redirect("/")
 
+#handles the return token after login auth
 @route('/auth_return')
 def auth_return():
 	code = request.query.code
@@ -109,7 +118,7 @@ def auth_return():
 
 	bottle.redirect(temp_redirect_url)
 
-
+#When loads the top keywords page when it is requested
 @route('/top_keywords')
 def top_keywords():
 	params = get_user_details()
@@ -129,10 +138,12 @@ def static_css(folder, filename):
 def static_css(filename):
     return static_file(filename, root='./')
 
+#When a 404 error occurs 
 @error(404)
 def error404(error):
    	return template('404.tpl')
 
+#When a 500 error occurs
 @error(500)
 def error500(error):
    	return template('500.tpl')

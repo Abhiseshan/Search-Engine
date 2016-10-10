@@ -1,6 +1,7 @@
 import urllib2
 import json
 
+#Gets json data from OpenWeatherAPI and parses it and returs a dictionary of needed elements
 def getWeatherInfo():
 	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/weather?q=Toronto,on&appid=4805980c3c170bc0dcb39db79bf940eb").read()
 	data = json.loads(contents)
