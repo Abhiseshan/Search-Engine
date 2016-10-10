@@ -73,7 +73,6 @@ def get_top_keywords_preview(db_id):
 
 	return result
 
-<<<<<<< HEAD
 def add_list_to_db(list, db_id):
 	db = 'db/' + db_id + '.db'
 	conn = sqlite3.connect(db)
