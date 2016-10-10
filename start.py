@@ -9,6 +9,8 @@ import urlparse
 import httplib2
 from apiclient.discovery import build
 
+temp_redirect_url = None
+
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './data',
@@ -45,10 +47,10 @@ def search():
 			db.update_entry(query, 1, params['id'])
 		params['query'] = query
 
-		if query in resolved_inverted_index.keys():
-			params['results'] = resolved_inverted_index[query]
-		else:
-			params['results'] = None
+		#if query in resolved_inverted_index.keys():
+		#	params['results'] = resolved_inverted_index[query]
+		#else:
+		params['results'] = None
 
 		return template('search.tpl', **params)
 	#if we detect that the phrase top keywords is present, we take them to a page displaying top keywords
