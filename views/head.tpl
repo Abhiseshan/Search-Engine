@@ -3,7 +3,7 @@
 
 	<link rel="icon" type="image/png" href="./favicon.ico">
 
-  	<title>Crapple Search</title>
+  	<title>Banora</title>
   	<meta name="description" content="The project for 326">
   	<meta name="author" content="Abhinav & Kartikay">
 

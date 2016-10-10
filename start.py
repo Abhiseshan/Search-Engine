@@ -3,6 +3,7 @@ import bottle
 import collections
 import database as db
 import weather as w
+import background as bg
 from beaker.middleware import SessionMiddleware
 from oauth2client.client import flow_from_clientsecrets
 import urlparse
@@ -24,10 +25,12 @@ app = SessionMiddleware(bottle.app(), session_opts)
 @route('/home')
 @route('/')
 def go_to_home():
-	weather = w.getWeatherInfo()
-	user = get_user_details()
-	params = weather.copy()
-	params.update(user)
+	#weather = w.getWeatherInfo()
+	#params = weather.copy()
+	params = get_user_details()
+	#params.update(user)
+	background = bg.getBackground()
+	params.update(background)
 	return template('home.tpl', **params)
 
 #Handles all search querys
@@ -39,7 +42,8 @@ def search():
 
 	#empty query, return back to the home
 	if (query == ''):
-		params.update(w.getWeatherInfo())
+		#params.update(w.getWeatherInfo())
+		params.update(bg.getBackground())
 		return template('home.tpl', **params)
 	#if we detect that it is a single query
 	elif " " not in query:
@@ -53,14 +57,6 @@ def search():
 		params['results'] = None
 
 		return template('search.tpl', **params)
-	#if we detect that the phrase top keywords is present, we take them to a page displaying top keywords
-	elif "top keywords" == query.lower():
-		if params['logged_in']:
-			db.update_entry("Top", 1, params['id'])
-			db.update_entry("Keywords", 1, params['id'])
-		params['query'] = query
-		return template('top_keywords.tpl', **params)
-	#Else we know it is a multi query string
 	else:
 		querys = query.split(' ')
 		for q in querys:
@@ -120,15 +116,11 @@ def auth_return():
 
 	bottle.redirect(temp_redirect_url)
 
-#When loads the top keywords page when it is requested
-@route('/top_keywords')
-def top_keywords():
+@route('/history')
+def history():
 	params = get_user_details()
-	if params['logged_in']:
-		db.update_entry("Top", 1, params['id'])
-		db.update_entry("Keywords", 1, params['id'])
-	params['query'] = "Top Keywords"
-	return template('top_keywords.tpl', **params)
+	params['query'] = "History"
+	return template('histroy.tpl', **params)
 
 #Static def for files in folders
 @route('/<folder:path>/<filename:path>')
