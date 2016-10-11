@@ -40,6 +40,9 @@ def search():
 	query = request.query.q
 	query = query.strip()
 
+	start = request.query.start
+	return start
+
 	#empty query, return back to the home
 	if (query == ''):
 		#params.update(w.getWeatherInfo())
