@@ -24,11 +24,11 @@
 		<div class="main-logo">
 				<img src="images/banora.png" />
 		</div>
-		<div class="devsite-search-wrapper devsite-home-page-search-wrapper">
-			<form class="devsite-search-form" action="search" method="get">
-			   	<div id="searchbox" class="devsite-searchbox">
-			   		<input placeholder="Search" type="text" class="devsite-search-field devsite-search-query search-query" name="q" value="" autocomplete="off">
-		        	<input type="submit" value="search" class="devsite-search-enter material-icons">
+		<div class="search-wrapper home-page-search-wrapper">
+			<form class="search-form" action="search" method="get">
+			   	<div id="searchbox" class="searchbox">
+			   		<input placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+		        	<input type="submit" value="search" class="search-enter material-icons">
 			    </div>
 		    </form>
 		</div>
