@@ -9,22 +9,21 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell--6-col mdl-cell--1-offset">
 
+			<!-- Calculator -->
 <%
-			#Regex matching for certain functions
 			import re
-			match = re.match( r'(\d*)\s*([\+\-\/\*])\s*(\d*)', query)
+			import requests
+
+			match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
 
 			if match:
-				val = eval(match.group())
-				params = {'ans': val, 'query':query + ' ='}
+				val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})				
+				params = {'ans': val.text, 'query':query + ' ='}
 				include('calculator.tpl', **params)
-			end
+			end	
 
 %>
 			
-
-
-
 			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
 <%
 			from collections import namedtuple		 			

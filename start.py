@@ -42,13 +42,17 @@ def search():
 
 	start = request.query.start
 
+	import re
+	match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+
 	#empty query, return back to the home
 	if (query == ''):
 		#params.update(w.getWeatherInfo())
 		params.update(bg.getBackground())
 		return template('home.tpl', **params)
+	#If we detect it is a special type=
 	#if we detect that it is a single query
-	elif " " not in query:
+	elif " " not in query or match is not None:
 		if params['logged_in'] and start is None:
 			db.update_entry(query, 1, params['id'])
 		params['query'] = query
