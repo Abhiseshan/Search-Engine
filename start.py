@@ -11,8 +11,6 @@ import httplib2
 import re
 from apiclient.discovery import build
 
-temp_redirect_url = None
-
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './data',
@@ -30,8 +28,8 @@ def go_to_home():
 	#params = weather.copy()
 	params = get_user_details()
 	#params.update(user)
-	background = bg.getBackground()
-	params.update(background)
+	#background = bg.getBackground()
+	params.update(bg.getBackground())
 	return template('home.tpl', **params)
 
 #Handles all search querys
@@ -72,6 +70,11 @@ def search():
 #Handles the login
 @route('/login')
 def login():
+	redirect_url = request.query.redirect
+	s = bottle.request.environ.get('beaker.session')
+	s['redirect_url'] = redirect_url
+	s.save()
+
 	flow = flow_from_clientsecrets('client_secrets.json', 
 		scope='https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email', 
 		redirect_uri='http://localhost:8080/auth_return')
@@ -112,10 +115,10 @@ def auth_return():
   	#create a new db (if it does not exist) file for the user
   	db.create_db(user_document['id'])
 
-  	if temp_redirect_url is None:
-		bottle.redirect("/")
-
-	bottle.redirect(temp_redirect_url)
+	s = bottle.request.environ.get('beaker.session')
+	redirect_url = "/"
+	redirect_url += s.get('redirect_url', "/")
+	bottle.redirect(redirect_url)
 
 @route('/history')
 def history():
