@@ -27,11 +27,14 @@
 						%end
 					</tbody>
 				</table>
+				<a href="/clear_history" class="clear-history-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Clear History</a>
 			</div>
+			%else:
+				<p>Please login to view this page. Thank you.</p>
 			%end
-			<!--TODO Make graphic to log into the page -->
 		</div>
 	</div>
+	<div style="height: 50px"></div>
 	% include('footer.tpl')
 </body>
 </html>

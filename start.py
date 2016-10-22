@@ -123,6 +123,12 @@ def history():
 	params['query'] = "History"
 	return template('histroy.tpl', **params)
 
+@route('/clear_history')
+def clear_history():
+	params = get_user_details()
+	db.recreate_db(params['id'])
+	bottle.redirect("/history")
+
 #Static def for files in folders
 @route('/<folder:path>/<filename:path>')
 def static_css(folder, filename):

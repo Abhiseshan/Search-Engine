@@ -559,6 +559,10 @@ p.result-link-description {
     z-index: 10000;
 }
 
+.clear-history-button {
+    margin-top: 20px;
+}
+
 /********************************************* screen response **************************************/
 
 @media (min-width: 544px) {
