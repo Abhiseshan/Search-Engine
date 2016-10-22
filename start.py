@@ -91,7 +91,7 @@ def logout():
 def auth_return():
 	code = request.query.code
 	if code is None:
-		return '500 - internal server error'
+		bottle.redirect(500)
 
 	flow = flow_from_clientsecrets('client_secrets.json', 
 		scope='https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email', 

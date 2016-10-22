@@ -34,7 +34,7 @@
 		</div>
 
 		%if logged_in:
-		<div class="search-history">
+		<div class="search-history-home-container">
 			%import database as db
 			%keywords = db.get_top_keywords_preview(id)
 			%for word in keywords:

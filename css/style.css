@@ -341,6 +341,14 @@ body {
     margin-top: 8%;
 }
 
+.search-history-home-container {
+    display: block;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 30px 24px;
+    position: relative;
+}
+
 /**************************** search results *************************************/
 a.result-link-name {
     font-size: 1.3em;
