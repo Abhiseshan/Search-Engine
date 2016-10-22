@@ -32,6 +32,19 @@
 			    </div>
 		    </form>
 		</div>
+
+		%if logged_in:
+		<div class="search-history">
+			%import database as db
+			%keywords = db.get_top_keywords_preview(id)
+			%for word in keywords:
+			<!-- Button Chip -->
+			<button type="button" class="mdl-chip">
+			    <span class="mdl-chip__text">{{word[0]}}</span>
+			</button>
+			%end			
+		</div>
+		%end
 	</div>
 
 	<div class="img-credits">{{bg_copywright}}</div>

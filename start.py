@@ -8,6 +8,7 @@ from beaker.middleware import SessionMiddleware
 from oauth2client.client import flow_from_clientsecrets
 import urlparse
 import httplib2
+import re
 from apiclient.discovery import build
 
 temp_redirect_url = None
@@ -48,7 +49,7 @@ def search():
 	#if we detect that it is a single query
 	elif " " not in query:
 		if params['logged_in']:
-			db.update_entry(query, 1, params['id'])
+			db.update_entry(query.strip(), 1, params['id'])
 		params['query'] = query
 
 		#if query in resolved_inverted_index.keys():
@@ -58,7 +59,7 @@ def search():
 
 		return template('search.tpl', **params)
 	else:
-		querys = query.split(' ')
+		querys = re.findall(r'\S+', query)
 		for q in querys:
 			q = q.strip()
 		queryCount = collections.Counter(querys)
