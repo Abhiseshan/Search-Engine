@@ -47,12 +47,12 @@ def update_entry_multi(keyword, count, c):
 			count += int(result[0][1])
 			c.execute('UPDATE keycount SET count=? WHERE keyword=?',(count, keyword))
 
-def get_top_keywords(db_id):
+def get_all_keywords(db_id):
 	db = 'db/' + db_id + '.db'
 	conn = sqlite3.connect(db)
 	c = conn.cursor()
 
-	c.execute('SELECT * FROM keycount ORDER BY count DESC LIMIT 10')
+	c.execute('SELECT * FROM keycount ORDER BY count')
 	result = c.fetchall()
 	
 	conn.commit()
@@ -60,7 +60,7 @@ def get_top_keywords(db_id):
 
 	return result
 
-def get_top_keywords_preview(db_id):
+def get_top_keywords(db_id):
 	db = 'db/' + db_id + '.db'
 	conn = sqlite3.connect(db)
 	c = conn.cursor()

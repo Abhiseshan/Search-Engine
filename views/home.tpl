@@ -36,7 +36,7 @@
 		%if logged_in:
 		<div class="search-history-home-container">
 			%import database as db
-			%keywords = db.get_top_keywords_preview(id)
+			%keywords = db.get_top_keywords(id)
 			%for word in keywords:
 			<!-- Button Chip -->
 			<button type="button" class="mdl-chip">
