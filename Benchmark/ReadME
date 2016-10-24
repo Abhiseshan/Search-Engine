@@ -1,0 +1,2 @@
+These logs are for lab2, benchmarking. It shows the execution of ApacheBench alone and with dstat
+Command that was run: ab -n 1000 -c 50 http://ec2-35-160-140-143.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
