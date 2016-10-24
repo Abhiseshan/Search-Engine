@@ -1,0 +1,114 @@
+ab -n 1000 -c 50 http://ec2-35-160-140-143.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-35-160-140-143.us-west-2.compute.amazonaws.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        WSGIServer/0.1
+Server Hostname:        ec2-35-160-140-143.us-west-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /search?q=helloworld+foo+bar
+Document Length:        2500 bytes
+
+Concurrency Level:      50
+Time taken for tests:   112.914 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      2768000 bytes
+HTML transferred:       2500000 bytes
+Requests per second:    8.86 [#/sec] (mean)
+Time per request:       5645.706 [ms] (mean)
+Time per request:       112.914 [ms] (mean, across all concurrent requests)
+Transfer rate:          23.94 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       81  112  30.8    103     362
+Processing:   147 5387 701.0   5510    5866
+Waiting:      110 2854 1557.2   2864    5826
+Total:        262 5500 700.0   5617    6035
+
+Percentage of the requests served within a certain time (ms)
+  50%   5617
+  66%   5679
+  75%   5736
+  80%   5758
+  90%   5814
+  95%   5873
+  98%   5933
+  99%   5942
+ 100%   6035 (longest request)
+
+
+############# With Dstat #############
+
+ab -n 1000 -c 50 http://ec2-35-160-140-143.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-35-160-140-143.us-west-2.compute.amazonaws.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        WSGIServer/0.1
+Server Hostname:        ec2-35-160-140-143.us-west-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /search?q=helloworld+foo+bar
+Document Length:        2500 bytes
+
+Concurrency Level:      50
+Time taken for tests:   116.105 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      2768000 bytes
+HTML transferred:       2500000 bytes
+Requests per second:    8.61 [#/sec] (mean)
+Time per request:       5805.262 [ms] (mean)
+Time per request:       116.105 [ms] (mean, across all concurrent requests)
+Transfer rate:          23.28 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       83  116  32.4    108     332
+Processing:   140 5547 735.9   5669    6246
+Waiting:      130 3117 1602.2   3110    6148
+Total:        251 5663 735.6   5786    6349
+
+Percentage of the requests served within a certain time (ms)
+  50%   5786
+  66%   5869
+  75%   5928
+  80%   5949
+  90%   6029
+  95%   6094
+  98%   6225
+  99%   6277
+ 100%   6349 (longest request)
