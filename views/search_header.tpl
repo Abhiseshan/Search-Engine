@@ -6,10 +6,10 @@
 			</div>
 		</div>
 		<div class="mdl-cell--6-col">
-			<form class="devsite-search-form" action="search" method="get">
-			   	<div id="searchbox" class="devsite-searchbox">
-			   		<input placeholder="Search" value="{{query}}" type="text" class="devsite-search-field devsite-search-query search-query" name="q" value="" autocomplete="off">
-		        	<input type="submit" value="search" class="devsite-search-enter material-icons">
+			<form class="search-form" action="search" method="get">
+			   	<div id="searchbox" class="searchbox">
+			   		<input placeholder="Search" value="{{query}}" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+		        	<input type="submit" value="search" class="search-enter material-icons">
 			    </div>
 		    </form>
 	    </div>

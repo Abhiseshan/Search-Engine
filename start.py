@@ -39,20 +39,24 @@ def search():
 	query = request.query.q
 	query = query.strip()
 
+	start = request.query.start
+
+	import re
+	match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+
 	#empty query, return back to the home
 	if (query == ''):
 		#params.update(w.getWeatherInfo())
 		params.update(bg.getBackground())
 		return template('home.tpl', **params)
+	#If we detect it is a special type=
 	#if we detect that it is a single query
-	elif " " not in query:
-		if params['logged_in']:
+	elif " " not in query or match is not None:
+		if params['logged_in'] and start is None:
 			db.update_entry(query.strip(), 1, params['id'])
 		params['query'] = query
+		params['start'] = start
 
-		#if query in resolved_inverted_index.keys():
-		#	params['results'] = resolved_inverted_index[query]
-		#else:
 		params['results'] = None
 
 		return template('search.tpl', **params)
@@ -61,7 +65,7 @@ def search():
 		for q in querys:
 			q = q.strip()
 		queryCount = collections.Counter(querys)
-		if params['logged_in']:
+		if params['logged_in'] and start is None:
 			db.add_list_to_db(queryCount, params['id'])
 		params['querys']=queryCount
 		params['query']=query

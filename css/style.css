@@ -122,7 +122,7 @@ input.search-query {
     height: 36px
 }
 
-.devsite-search-form {
+.search-form {
     background: #607d8b;
     border-radius: 2px;
     display: inline-block;
@@ -138,18 +138,18 @@ input.search-query {
     width: 200px;
 }
 
-.devsite-search-image {
+.search-image {
     color: #fff;
     left: 24px;
     position: absolute;
     top: 6px;
     transition: color .2s
 }
-.devsite-search-image::before {
+.search-image::before {
     content: 'search'
 }
 
-.devsite-search-enter {
+.search-enter {
     color: #fff;
     right: 0;
     position: absolute;
@@ -163,18 +163,18 @@ input.search-query {
     height: 100%
 }
 
-.devsite-search-enter::before {
+.search-enter::before {
     content: 'send'
 }
 
-.devsite-search-enter:hover {
+.search-enter:hover {
     background-color: mediumpurple;
 }
 
-.devsite-search-active .devsite-search-image {
+.search-active .search-image {
     color: #757575
 }
-input.devsite-search-field {
+input.search-field {
     background: 0;
     border: 0;
     color: #fff;
@@ -183,49 +183,49 @@ input.devsite-search-field {
     transition: color .2s;
     width: 100%
 }
-.devsite-search-active .devsite-search-field {
+.search-active .search-field {
     color: #212121
 }
-input.devsite-search-field:focus {
+input.search-field:focus {
     border: 0;
     padding-bottom: 8px
 }
-.devsite-search-form::-webkit-input-placeholder {
+.search-form::-webkit-input-placeholder {
     color: #fff;
     transition: color .2s
 }
-.devsite-search-form:-moz-placeholder {
+.search-form:-moz-placeholder {
     color: #fff;
     transition: color .2s
 }
-.devsite-search-form::-moz-placeholder {
+.search-form::-moz-placeholder {
     color: #fff;
     transition: color .2s
 }
-.devsite-search-form:-ms-input-placeholder {
+.search-form:-ms-input-placeholder {
     color: #fff;
     transition: color .2s
 }
-.devsite-search-active .devsite-search-form::-webkit-input-placeholder {
+.search-active .search-form::-webkit-input-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form:-moz-placeholder {
+.search-active .search-form:-moz-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form::-moz-placeholder {
+.search-active .search-form::-moz-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form:-ms-input-placeholder {
+.search-active .search-form:-ms-input-placeholder {
     color: #757575
 }
-.devsite-search-button {
+.search-button {
     margin: 12px 16px 12px 0
 }
-.devsite-search-button::before {
+.search-button::before {
     content: 'search'
 }
-.devsite-home-page-search-wrapper,
-.devsite-home-page-search-wrapper.devsite-search-active {
+.home-page-search-wrapper,
+.home-page-search-wrapper.search-active {
     border: 0;
     display: block;
     margin: 0 auto;
@@ -233,49 +233,49 @@ input.devsite-search-field:focus {
     padding: 0 24px;
     position: relative;
 }
-.devsite-search-form,
-.devsite-search-form:hover {
+.search-form,
+.search-form:hover {
     background: #fff;
     display: block;
     margin: 0;
     width: 100%
 }
-.devsite-search-form::-webkit-input-placeholder {
+.search-form::-webkit-input-placeholder {
     color: #212121
 }
-.devsite-search-form:-moz-placeholder {
+.search-form:-moz-placeholder {
     color: #212121
 }
-.devsite-search-form::-moz-placeholder {
+.search-form::-moz-placeholder {
     color: #212121
 }
-.devsite-search-form:-ms-input-placeholder {
+.search-form:-ms-input-placeholder {
     color: #212121
 }
-.devsite-search-active .devsite-search-form::-webkit-input-placeholder {
+.search-active .search-form::-webkit-input-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form:-moz-placeholder {
+.search-active .search-form:-moz-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form::-moz-placeholder {
+.search-active .search-form::-moz-placeholder {
     color: #757575
 }
-.devsite-search-active .devsite-search-form:-ms-input-placeholder {
+.search-active .search-form:-ms-input-placeholder {
     color: #757575
 }
-input.devsite-search-field,
-.devsite-search-image {
+input.search-field,
+.search-image {
     color: #212121
 }
 
-.devsite-search-form, .devsite-search-form:hover {
+.search-form, .search-form:hover {
     background: #fff;
     display: block;
     margin: 0;
     width: 100%;
 }
-.devsite-searchbox {
+.searchbox {
 	box-sizing: border-box;
 }
 *, *:before, *:after {
@@ -380,7 +380,7 @@ p.result-link-description {
 }
 
 .search-results-container {
-    padding: 36px 0 0 0;
+    padding: 36px 0 36px 0;
 }
 
 /****************************************** pagination ******************************/
@@ -579,4 +579,58 @@ p.result-link-description {
     .screen-lg {
         display: none;
     }
+}
+
+/********************************************** calculator ********************************************/
+
+.calculator {
+    width: 90%;
+    height: 320px;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.calculator input {
+    height: 15%;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: larger;
+    padding: 2px 8px;
+}
+
+.calculator .row {
+    padding: 4px;
+}
+
+.calc-button {
+    width: 12.28%;
+    margin: 0 2px;
+}
+
+.calculator .buttons {
+    margin: 0 auto;
+}
+
+.calculator .num-button {
+    background: powderblue;
+}
+
+.calculator .op-button {
+    background: darkgrey;
+}
+
+.calculator .query {
+    text-align: right;
+    font-size: 12px;
+    width: 90%;
+    margin: 0 auto;
+
+}
+
+/********************************************** button colours *****************************************/
+
+.button-color-blueviolet {
+    background: blueviolet;
 }
