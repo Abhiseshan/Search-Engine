@@ -11,6 +11,7 @@ import httplib2
 import re
 from apiclient.discovery import build
 
+
 session_opts = {
     'session.type': 'file',
     'session.data_dir': './data',
@@ -171,4 +172,4 @@ def get_user_details():
 	return user
 
 
-run(host='localhost', port=8080, debug=True, app=app)
+run(host='localhost', port=8080, app=app, server='gunicorn', workers=4)

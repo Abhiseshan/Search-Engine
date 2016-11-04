@@ -58,6 +58,8 @@
 			searchResults.append(ResultStruct("Test26", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
 			searchResults.append(ResultStruct("Test27", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
 	
+			searchResults *= 10
+
 			tot_results = len(searchResults)
 
 			if start is None or str(start) is '':
@@ -127,7 +129,12 @@
 		        %for i in range(current-7, current+7):
 		        	%if i <= max_pg and i >=0:
 		        		%url_i = url + str(i) + "0"
-		        		<li class="page-item"><a href="{{url_i}}">{{i+1}}</a></li>
+		        		%if i == current:
+		        			%active="active"
+		        		%else:
+		        			%active=""
+		        		%end
+		        		<li class="page-item {{active}}"><a href="{{url_i}}">{{i+1}}</a></li>
 		        	%end
 		        %end
 

@@ -400,6 +400,10 @@ p.result-link-description {
     color: blue;
 }
 
+.pagination .active a {
+    color: red;
+}
+
 /********************************************* misc **************************************/
 
 .query-count-table {
@@ -634,3 +638,4 @@ p.result-link-description {
 .button-color-blueviolet {
     background: blueviolet;
 }
+
