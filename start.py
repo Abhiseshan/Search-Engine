@@ -10,6 +10,7 @@ import urlparse
 import httplib2
 import re
 from apiclient.discovery import build
+import gviz_api
 
 
 session_opts = {
@@ -20,6 +21,14 @@ session_opts = {
 }
 
 app = SessionMiddleware(bottle.app(), session_opts)
+
+@route('/weather')
+def test_weather():
+  	return template('weather.tpl')
+
+@route('/weather_json')
+def test_weather_json():
+  	return w.getWeatherJSON()
 
 #Load the home page with weather and user data
 @route('/home')
@@ -172,4 +181,4 @@ def get_user_details():
 	return user
 
 
-run(host='localhost', port=8080, app=app, server='gunicorn', workers=4)
+run(host='localhost', port=8080, app=app, debug=True)
