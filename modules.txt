@@ -1,1 +1,1 @@
-pip install -U https://github.com/google/google-visualization-python/zipball/master beaker bottle boto gunicorn google-api-python-client
+pip install -U https://github.com/google/google-visualization-python/zipball/master beaker bs4 bottle boto gunicorn google-api-python-client

@@ -103,10 +103,39 @@ def recreate_db(db_id):
 	conn.commit()
 	c.close()
 
-def fetch_url_title(url):
-    database = sqlite3.connect('database.db')
-    c = database.cursor()
-    c.execute('SELECT doc_url_title FROM DOC_INFO WHERE doc_url=?', (url,))
-    title = c.fetchone()
-    c.close()
-    return title[0]
+def fetch_web_links(word):
+	conn = sqlite3.connect("database.db")
+	c = conn.cursor()
+
+	#Get word id from lexicon
+	c.execute("SELECT * FROM lexicon WHERE word=?", (word,))
+	res = c.fetchone()
+	if (res is None):
+		return None, None
+
+	word_id = res[0]
+
+	#Get All the pages containing the word
+	c.execute("SELECT * FROM invertedindex WHERE word_id=?", (word_id,))
+	res = c.fetchone()
+	doc_ids = res[1]
+	doc_ids = "(" + doc_ids + ")"
+
+	#Get page rank of all the pages
+	c.execute("SELECT * FROM pagerank WHERE doc_id IN" + doc_ids + " ORDER BY doc_rank ASC")
+	res = c.fetchall()
+
+	pagerank = []
+	for r in res:
+		pagerank.append(int(r[0]))
+
+	#Get information about the page
+	c.execute("SELECT * FROM DocIndex WHERE doc_id in" + doc_ids)
+	res = c.fetchall()
+
+	pages = {}
+	for r in res:
+		pages[int(r[0])] = r 
+
+	c.close()
+	return pages, pagerank

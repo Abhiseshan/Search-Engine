@@ -6,7 +6,6 @@ from datetime import *
 def getWeatherInfo():
 	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/weather?q=Toronto,on&appid=4805980c3c170bc0dcb39db79bf940eb").read()
 	data = json.loads(contents)
-	print data
 	temp = float(data['main']['temp'])
 	temp_min = float(data['main']['temp_min'])
 	temp_max = float(data['main']['temp_max'])
@@ -16,54 +15,37 @@ def getWeatherInfo():
 	temp = str(int(temp)) + u"\u00b0"
 	temp_min = str(int(temp_min)) + u"\u00b0"
 	temp_max = str(int(temp_max)) + u"\u00b0"
-	weather = {	'temp': temp, 
-				'temp_min': temp_min, 
-				'temp_max': temp_max, 
-				'desc': data['weather'][0]['main'], 
-				'icon': data['weather'][0]['icon'],
-				'location': data['name'] + ", " + data['sys']['country']
-
+	weather = {	
+		'temp': temp, 
+		'temp_min': temp_min, 
+		'temp_max': temp_max, 
+		'desc': data['weather'][0]['main'], 
+		'icon': data['weather'][0]['icon'],
+		'location': data['name'] + ", " + data['sys']['country']
 	}
 	return weather
 
 def getExtendedWeatherInfo():
-	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/forecast?q=Toronto,on&appid=4805980c3c170bc0dcb39db79bf940eb").read()
-	data = json.loads(contents)
+	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/forecast/daily?q=Toronto,on&units=metric&cnt=5&appid=4805980c3c170bc0dcb39db79bf940eb").read()
+	data = json.loads(contents)	
 	wlist = data['list']
 	weatherList = {}
 	dateList = []
-	current_date = ""
 	for item in wlist:
-		dt = item['dt_txt']
-		dt = dt.split(" ")
-		if (dt[0] != current_date):
-			current_date = dt[0]
-			weatherList[current_date] = []
-			dateList.append(dt[0])
-
-		temp = float(item['main']['temp'])
-		temp = temp - 273.15
-		temp = str(int(temp)) + u"\u00b0"
-		desc = item['weather'][0]['main']
-		weatherList[current_date].append({
-			'time': dt[1],
-			'temp': temp,
-			'desc': desc
-			})
+		dt = datetime.fromtimestamp(int(item['dt'])).strftime('%a')
+		#datetime.fromtimestamp(int(item['dt'])).strftime('%Y-%m-%d')
+		dateList.append(dt)
+		temp_min = int(float(item['temp']['min']))
+		temp_max = int(float(item['temp']['max']))
+		weatherList[dt] = {"temp_min":temp_min, "temp_max":temp_max, "icon":item['weather'][0]['icon']}
 	
-	weather = {
-		'location': data['city']['name'] + ", " + data['city']['country'],
-		'date_list': dateList,
-		'weather_list': weatherList
-	}
-	return weather
+	return weatherList,dateList
 
 def getWeatherJSON():
-	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/forecast?q=Toronto,on&appid=4805980c3c170bc0dcb39db79bf940eb").read()
+	contents = urllib2.urlopen("http://api.openweathermap.org/data/2.5/forecast?q=Toronto,on&units=metric&appid=4805980c3c170bc0dcb39db79bf940eb").read()
 	data = json.loads(contents)
 	wlist = data['list']
 	weatherList = {}
-	dateList = []
 	current_date = ""
 	for item in wlist:
 		dt = item['dt_txt']
@@ -74,15 +56,11 @@ def getWeatherJSON():
 		if (dt[0] != current_date):
 			current_date = dt[0]
 			weatherList[current_date] = []
-			dateList.append(dt[0])
 
-		temp = float(item['main']['temp'])
-		temp = temp - 273.15
-		temp = int(temp)
+		temp = int(float(item['main']['temp']))
 		desc = item['weather'][0]['main']
 		weatherList[current_date].append({'c':[{'v': tm},{'v': temp},{'v': temp}]})
 	
-
 	weather_json = {
 		'cols': [        
 			{"label":"Hour","type":"string"},

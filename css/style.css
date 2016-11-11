@@ -349,6 +349,12 @@ body {
     position: relative;
 }
 
+.weather-container {
+    max-width: 500px;
+    padding: 20px;
+    background: white;
+}
+
 /**************************** search results *************************************/
 a.result-link-name {
     font-size: 1.3em;
@@ -420,67 +426,6 @@ p.result-link-description {
 
 .mdl-card__actions.mdl-card--border {
     border: 0;
-}
-
-.card-weather {
-    background-color: white;
-    height: 100%;
-}
-
-.card-weather .current .city {
-    font-size: 1.5em;
-    color: white;
-    margin-top: 8px;
-    font-weight: 200;
-}
-
-.card-weather .current .devider {
-    content: "";
-    width: 20px;
-    height: 2px;
-    background-color: #fff;
-    margin: 12px 0 8px 2px;
-}
-
-.card-weather .current .desc {
-    font-size: 0.8em;
-    color: white;
-    padding-bottom: 12px;
-    text-transform: uppercase;
-}
-
-.card-weather .current .temp {
-    font-size: 2em;
-    color: white;
-    font-weight: 100;
-    padding-top: 1em;
-}
-
-.card-weather .current .icon img {
-    max-width: 80px;
-    max-width: 80px;
-    float: right;
-}
-
-.card-weather .current {
-    padding: 16px;
-    height: 70%;
-    background-image: url("/images/bg_weather_toronto.png");
-    background-size:     cover;                      /* <------ */
-    background-repeat:   no-repeat;
-    background-position: center center;              /* optional, center the image */
-}
-
-.card-weather .high-low {
-    padding: 16px;
-}
-
-.card-weather .high-low div {
-    display: inline;
-}
-
-.card-weather .high-low .icon img {
-    max-height: 50px;
 }
 
 .mdl-card-wide {
@@ -630,7 +575,54 @@ p.result-link-description {
     font-size: 12px;
     width: 90%;
     margin: 0 auto;
+}
 
+/********************************************** weather *****************************************/
+
+.weather-day .icon img {
+    max-width: 50px;
+    max-width: 50px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.currentWeather-container .icon img {
+    max-width: 80px;
+    max-width: 80px;
+}
+
+.days_container {
+    width: 100%;
+    display: table;
+}
+
+.weather-day {
+    display: table-cell;
+    padding: 10px;
+}
+
+.weather-day .max_min {
+    width: 45%;
+    display: inline-block;
+    text-align: right;
+}
+
+.currentWeather-container {
+    padding: 10px;
+    display: flex;
+}
+
+.currentWeather-container .curr_temp {
+    font-size: 4em;
+}
+
+.weather-container .location {
+    margin: 0;
+}
+
+.weather-container .desc {
+    font-size: 1em;
+    padding-bottom: 20px;
 }
 
 /********************************************** button colours *****************************************/

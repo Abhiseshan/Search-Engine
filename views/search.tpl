@@ -23,42 +23,18 @@
 			end	
 
 %>
-			
-			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
+
 <%
+			import database as db
 			from collections import namedtuple		 			
 			ResultStruct = namedtuple("ResultStruct", "name link description")		
-			searchResults = []		
-			#for testing purposes only		
-			searchResults.append(ResultStruct("Test1", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))		
-			searchResults.append(ResultStruct("Test2", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))		
-			searchResults.append(ResultStruct("Test3", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))		
-			searchResults.append(ResultStruct("test4", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))		
-			searchResults.append(ResultStruct("Test5", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))		
-			searchResults.append(ResultStruct("Test6", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test7", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test8", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test9", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test10", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test11", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test12", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test13", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test14", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test15", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test16", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test17", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test18", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test19", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test20", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test21", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test22", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test23", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test24", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test25", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test26", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-			searchResults.append(ResultStruct("Test27", "test.com", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id enim orci. Quisque at risus sapien. Duis congue purus in lorem sagittis, quis fringilla tortor rhoncus. Duis malesuada pellentesque sapien, id elementum est tincidunt at. Mauris id placerat lectus. Nulla."))
-	
-			searchResults *= 10
+			searchResults = []
+
+			pages, pagerank = db.fetch_web_links(query)
+			if not pages is None:
+			for page in pagerank:
+				searchResults.append(ResultStruct(pages[page][2], pages[page][1], ""))
+			end
 
 			tot_results = len(searchResults)
 
@@ -81,17 +57,10 @@
  				include('search_result.tpl', **params)
  			end
 
-			#import database as db
-
-			#if results is not None:
-			#	description = ""
-
-				#for result in results:
-					#params = {'link_name':db.fetch_url_title(result), 'link_url':result, 'link_description':description}
-					#include('search_result.tpl', **params)
-				#end
-			#end
 %>
+			
+			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
+
 			</div>
 			%if logged_in:
 			<div class="query-count-table mdl-cell--4-col" style="margin: 0 auto">

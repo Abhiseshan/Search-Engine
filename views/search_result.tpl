@@ -1,5 +1,5 @@
 				<div class="search-result">
-					<a href="link" class="result-link-name">{{link_name}}</a>
+					<a href="{{link_url}}" class="result-link-name">{{link_name}}</a>
 					<p class="result-link-url">{{link_url}}</p>
 					<p class="result-link-description">{{link_description}}</p>	
 				</div>
