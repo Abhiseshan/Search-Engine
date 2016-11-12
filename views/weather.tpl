@@ -45,7 +45,7 @@
 		<h4 class="location">{{currentWeather['location']}}</h4>
 		<div class="desc">{{currentWeather['desc']}}</div>
  		<div class="currentWeather-container">
-	  		<div class="icon"><img src="/images/ic_weather/{{currentWeather['icon']}}.png"></div>
+	  		<!--<div class="icon"><img src="/images/ic_weather/{{currentWeather['icon']}}.png"></div>-->
 	  		<div class="curr_temp">{{currentWeather['temp']}}C</div>
 	  	</div>
 		<div id="chart_div" style="width: 100%; height: 130px;"></div>

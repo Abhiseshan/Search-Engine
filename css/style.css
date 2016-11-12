@@ -349,12 +349,6 @@ body {
     position: relative;
 }
 
-.weather-container {
-    max-width: 500px;
-    padding: 20px;
-    background: white;
-}
-
 /**************************** search results *************************************/
 a.result-link-name {
     font-size: 1.3em;
@@ -370,8 +364,9 @@ a.result-link-name:hover{
 p.result-link-url {
     margin-bottom: 0;
     color: olive;
-    font-size: 1em;
-    line-height: 18px
+    font-size: 0.8em;
+    line-height: 18px;
+    white-space: nowrap;
 }
 
 p.result-link-description {
@@ -578,6 +573,13 @@ p.result-link-description {
 }
 
 /********************************************** weather *****************************************/
+
+.weather-container {
+    width: 90%;
+    padding: 20px;
+    background: white;
+    margin-bottom: 40px;
+}
 
 .weather-day .icon img {
     max-width: 50px;

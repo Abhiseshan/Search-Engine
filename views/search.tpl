@@ -16,12 +16,23 @@
 
 			match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
 
-			if match:
-				val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})				
-				params = {'ans': val.text, 'query':query + ' ='}
+			if match: 
+				val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})
+				if not "Error: Undefined symbol" in val.text:
+					params = {'ans': val.text, 'query':query + ' ='}
+					include('calculator.tpl', **params)
+				end
+			elif query == "calculator":
+				params = {'ans': "0", 'query':""}
 				include('calculator.tpl', **params)
-			end	
+			end
 
+%>
+
+<% 
+			if query == "weather":
+				include('weather.tpl')
+			end
 %>
 
 <%
@@ -31,33 +42,44 @@
 			searchResults = []
 
 			pages, pagerank = db.fetch_web_links(query)
+
 			if not pages is None:
-			for page in pagerank:
-				searchResults.append(ResultStruct(pages[page][2], pages[page][1], ""))
-			end
+		 		for page in pagerank:
+					searchResults.append(ResultStruct(pages[page][2], pages[page][1], pages[page][3]))
+				end
 
-			tot_results = len(searchResults)
+				tot_results = len(searchResults)-1
 
-			if start is None or str(start) is '':
-				start = 0
-			end
+				if start is None or str(start) is '':
+					start = 0
+				end
 
-			start = int(start)
+				start = int(start)
 
-			max_pg = tot_results/10
-			current = start/10
+				max_pg = tot_results/10
+				current = start/10
 
-			url = '/search?q=' + query +  u"\u0026" + 'start='
+				url = '/search?q=' + query +  u"\u0026" + 'start='
 
-			pageSearchResults = [searchResults[i:i+10] for i in range(0,len(searchResults),10)]
+				pageSearchResults = [searchResults[i:i+10] for i in range(0,len(searchResults),10)]
 
 
-			for result in pageSearchResults[current]:
-				params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
- 				include('search_result.tpl', **params)
- 			end
-
+				for result in pageSearchResults[current]:
+					params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
+	 				include('search_result.tpl', **params)
+	 			end
+	 		else:
 %>
+
+			<p>Your search - <b>{{query}} </b>- did not match any documents.</p>
+			<p>Suggestions</p>
+			<ul>
+				<li>Make sure that all words are spelled correctly</li>
+				<li>Try different keywords.</li>
+				<li>Try more general keywords.</li>
+			</ul>
+
+			%end
 			
 			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
 
@@ -86,6 +108,7 @@
 			%end
 		</div>
 
+		%if not pages is None: 
 		<nav class="mdl-grid">
 		    <ul class="pagination mdl-cell--1-offset">
 		        <!--Arrow left-->
@@ -94,19 +117,17 @@
 		                <span aria-hidden="true">&laquo;</span>
 		            </a>
 		        </li>
-
-		        %for i in range(current-7, current+7):
-		        	%if i <= max_pg and i >=0:
-		        		%url_i = url + str(i) + "0"
-		        		%if i == current:
-		        			%active="active"
-		        		%else:
-		        			%active=""
-		        		%end
-		        		<li class="page-item {{active}}"><a href="{{url_i}}">{{i+1}}</a></li>
-		        	%end
-		        %end
-
+			        %for i in range(current-7, current+7):
+			        	%if i <= max_pg and i >=0:
+			        		%url_i = url + str(i) + "0"
+			        		%if i == current:
+			        			%active="active"
+			        		%else:
+			        			%active=""
+			        		%end
+			        		<li class="page-item {{active}}"><a href="{{url_i}}">{{i+1}}</a></li>
+			        	%end
+			        %end
 		        <!--Arrow right-->
 		        <li class="page-item">
 		            <a class="page-link" aria-label="Next">
@@ -115,6 +136,7 @@
 		        </li>
 		    </ul>
 		</nav>
+	    %end
 	</div>
 	<div style="height: 50px"></div>
 
