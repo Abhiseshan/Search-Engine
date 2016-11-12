@@ -41,7 +41,7 @@
   <body>
   	% currentWeather = w.getWeatherInfo()
   	% weatherList, dateList = w.getExtendedWeatherInfo()
-  	<div class="weather-container">
+  	<div class="weather-container mdl-card mdl-shadow--2dp">
 		<h4 class="location">{{currentWeather['location']}}</h4>
 		<div class="desc">{{currentWeather['desc']}}</div>
  		<div class="currentWeather-container">

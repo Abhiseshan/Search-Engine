@@ -37,11 +37,18 @@
 
 <%
 			import database as db
+			import urllib
+			from bottle import *
 			from collections import namedtuple		 			
 			ResultStruct = namedtuple("ResultStruct", "name link description")		
 			searchResults = []
 
-			pages, pagerank = db.fetch_web_links(query)
+
+			try: 
+				pages, pagerank = db.fetch_web_links_multi(querys)
+			except NameError: 
+				pages, pagerank = db.fetch_web_links(query)
+			end
 
 			if not pages is None:
 		 		for page in pagerank:
@@ -59,7 +66,7 @@
 				max_pg = tot_results/10
 				current = start/10
 
-				url = '/search?q=' + query +  u"\u0026" + 'start='
+				url = '/search?' + urllib.urlencode({'q':query}) +  u"\u0026" + 'start='
 
 				pageSearchResults = [searchResults[i:i+10] for i in range(0,len(searchResults),10)]
 

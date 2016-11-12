@@ -51,7 +51,8 @@ def search():
 
 	start = request.query.start
 
-	import re
+	#pre lab3 query handling
+	"""import re
 	match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
 
 	#empty query, return back to the home
@@ -79,7 +80,35 @@ def search():
 			db.add_list_to_db(queryCount, params['id'])
 		params['querys']=queryCount
 		params['query']=query
-		return template('multisearch.tpl', **params)
+		return template('multisearch.tpl', **params)"""
+
+		#Updated search query handling from lab3
+	if (query == ''):
+		#params.update(w.getWeatherInfo())
+		params.update(bg.getBackground())
+		return template('home.tpl', **params)
+	#If we detect it is a special type=
+	#if we detect that it is a single query
+	elif " " not in query:
+		if params['logged_in'] and start is None:
+			db.update_entry(query.strip(), 1, params['id'])
+		params['query'] = query
+		params['start'] = start
+
+		params['results'] = None
+
+		return template('search.tpl', **params)
+	else:
+		querys = re.findall(r'\S+', query)
+		for q in querys:
+			q = q.strip()
+		queryCount = collections.Counter(querys)
+		if params['logged_in'] and start is None:
+			db.add_list_to_db(queryCount, params['id'])
+		params['querys']=queryCount
+		params['query']=query
+		params['start'] = start
+		return template('search.tpl', **params)
 
 #Handles the login
 @route('/login')
