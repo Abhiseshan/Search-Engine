@@ -219,5 +219,3 @@ def fetch_web_links_multi(_query):
 			print "oops"
 
 	return pages, pagerank
-
-#fetch_web_links_multi({"apple":1, "google":1})
