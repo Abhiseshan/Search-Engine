@@ -1,0 +1,18 @@
+Running command: siege -u http://localhost:8081/search?q=helloworld+foo+bar -d1 -r10 -c25
+
+** SIEGE 3.0.5
+** Preparing 25 concurrent users for battle.
+
+Transactions:                    241 hits
+Availability:                  96.40 %
+Elapsed time:                  11.18 secs
+Data transferred:               1.00 MB
+Response time:                  0.25 secs
+Transaction rate:              21.56 trans/sec
+Throughput:                     0.09 MB/sec
+Concurrency:                    5.40
+Successful transactions:         241
+Failed transactions:               9
+Longest transaction:            1.38
+Shortest transaction:           0.02
+
