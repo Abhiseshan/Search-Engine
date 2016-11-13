@@ -182,8 +182,8 @@ Since we implemented a database, the max requests per second dropped to 6.57 fro
 5805.262 [ms] (mean) to 7605.410 [ms] (mean). The overall mean across all concurrent requests went up from 116 ms to 152 ms. This was 
 mainly due to the implementation and usage of the database, and all the queries that it got. The max % cpu usage was about 65% in lab 3 
 while it was 3% in lab 2. This was due to the database lookup requests made. The % disk input/output was o% in both labs. The network 
-usage was consistent in both labs. When we ran siege to test the limits of the server we found that the data transferred increase, and 
-this is due to the data fetched from the SQLite database.
+usage was consistent in both labs. When we ran siege to test the limits of the server we found that the data transferred increased, and 
+this was due to the data fetched from the SQLite database.
 
 
 
