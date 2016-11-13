@@ -1,5 +1,65 @@
 ##### LAB 3 Benchmark #####
-ran command: ab -n 1000 -c 50 http://ec2-35-163-137-236.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+
+##### lab 2 benchmark With Dstat #####
+
+ab -n 1000 -c 50 http://ec2-35-160-140-143.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-35-160-140-143.us-west-2.compute.amazonaws.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        WSGIServer/0.1
+Server Hostname:        ec2-35-160-140-143.us-west-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /search?q=helloworld+foo+bar
+Document Length:        2500 bytes
+
+Concurrency Level:      50
+Time taken for tests:   116.105 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      2768000 bytes
+HTML transferred:       2500000 bytes
+Requests per second:    8.61 [#/sec] (mean)
+Time per request:       5805.262 [ms] (mean)
+Time per request:       116.105 [ms] (mean, across all concurrent requests)
+Transfer rate:          23.28 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       83  116  32.4    108     332
+Processing:   140 5547 735.9   5669    6246
+Waiting:      130 3117 1602.2   3110    6148
+Total:        251 5663 735.6   5786    6349
+
+Percentage of the requests served within a certain time (ms)
+  50%   5786
+  66%   5869
+  75%   5928
+  80%   5949
+  90%   6029
+  95%   6094
+  98%   6225
+  99%   6277
+ 100%   6349 (longest request)
+ 
+##### Lab 3 results #####
+Using Command: ab -n 1000 -c 50 http://ec2-35-163-137-236.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
 
 Output log (without Dstat):
 
@@ -57,6 +117,71 @@ Percentage of the requests served within a certain time (ms)
   98%   8322
   99%   8962
  100%   9153 (longest request)
+
+##### with Dstat running #####
+Using Command: ab -n 1000 -c 50 http://ec2-35-163-137-236.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+
+# ab -n 1000 -c 50 http://ec2-35-163-137-236.us-west-2.compute.amazonaws.com/search?q=helloworld+foo+bar
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-35-163-137-236.us-west-2.compute.amazonaws.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        gunicorn/19.6.0
+Server Hostname:        ec2-35-163-137-236.us-west-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /search?q=helloworld+foo+bar
+Document Length:        9094 bytes
+
+Concurrency Level:      50
+Time taken for tests:   152.108 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      9367000 bytes
+HTML transferred:       9094000 bytes
+Requests per second:    6.57 [#/sec] (mean)
+Time per request:       7605.410 [ms] (mean)
+Time per request:       152.108 [ms] (mean, across all concurrent requests)
+Transfer rate:          60.14 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       96  134 106.1    110    1230
+Processing:   190 7303 3217.7   6781   22704
+Waiting:      150 4310 3570.8   3780   18832
+Total:        292 7438 3213.9   6941   22810
+
+Percentage of the requests served within a certain time (ms)
+  50%   6941
+  66%   7211
+  75%   7291
+  80%   7356
+  90%   9689
+  95%  18870
+  98%  20659
+  99%  20803
+ 100%  22810 (longest request)
+
+##### Report On lab3 vs lab2 Benchmarking #####
+
+Since we implemented a database, the max requests per second dropped to 6.57 from 8.61. In addition, the time per request went up from 5805.262 [ms] (mean) to 7605.410 [ms] (mean). The overall mean across all concurrent requests went up from 116 ms to 152 ms. This was mainly due to the implementation and usage of the database, and all the queries that it got. The max % cpu usage was about 65% in lab 3 while it was 3% in lab 2. This was due to the database lookup requests made. The % disk input/output was o% in both labs. The network usage was consistent in both labs. When we ran siege to test the limits of the server we found that the data transferred increase, and this is due to the data fetched from the SQLite database.
+
+
+
 
 
 
