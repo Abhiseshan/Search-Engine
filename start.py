@@ -1,4 +1,4 @@
-from bottle import route, run, static_file, request, template, error
+from bottle import route, run, static_file, request, template, error, post, put, delete
 import bottle
 import collections
 import database as db
@@ -29,6 +29,21 @@ def test_weather():
 @route('/weather_json')
 def test_weather_json():
   	return w.getWeatherJSON()
+
+
+
+@post('/')
+@post('/home')
+@post('/search')
+@put('/')
+@put('/home')
+@put('/search')
+@delete('/')
+@delete('/home')
+@delete('/search')
+
+def unsupported_url():
+	bottle.redirect(500)
 
 #Load the home page with weather and user data
 @route('/home')
