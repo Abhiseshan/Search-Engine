@@ -9,30 +9,41 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell--6-col mdl-cell--1-offset">
 
+<%
+			if start is None or str(start) is '':
+				start = 0
+			end
+
+			start = int(start)
+%>
+
 			<!-- Calculator -->
 <%
-			import re
-			import requests
 
-			match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+			if start == 0:
+				import re
+				import requests
 
-			if match: 
-				val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})
-				if not "Error: Undefined symbol" in val.text:
-					params = {'ans': val.text, 'query':query + ' ='}
+				match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+				
+				if match: 
+					val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})
+					if not "Error: Undefined symbol" in val.text:
+						params = {'ans': val.text, 'query':query + ' ='}
+						include('calculator.tpl', **params)
+					end
+				elif query == "calculator":
+					params = {'ans': "0", 'query':""}
 					include('calculator.tpl', **params)
 				end
-			elif query == "calculator":
-				params = {'ans': "0", 'query':""}
-				include('calculator.tpl', **params)
-			end
 
 %>
 
-<% 
-			if query == "weather":
-				include('weather.tpl')
-			end
+<%
+			if start == 0:
+				if query == "weather":
+					include('weather.tpl')
+				end
 %>
 
 <%
@@ -56,12 +67,6 @@
 				end
 
 				tot_results = len(searchResults)-1
-
-				if start is None or str(start) is '':
-					start = 0
-				end
-
-				start = int(start)
 
 				max_pg = tot_results/10
 				current = start/10
