@@ -15,10 +15,8 @@
 			end
 
 			start = int(start)
-%>
 
-			<!-- Calculator -->
-<%
+	#Calculator 
 
 			if start == 0:
 				import re
@@ -36,24 +34,25 @@
 					params = {'ans': "0", 'query':""}
 					include('calculator.tpl', **params)
 				end
+			end
 
-%>
 
-<%
+	#Weather
+
 			if start == 0:
 				if query == "weather":
 					include('weather.tpl')
 				end
-%>
+			end
 
-<%
+	#Search Results
+
 			import database as db
 			import urllib
 			from bottle import *
 			from collections import namedtuple		 			
 			ResultStruct = namedtuple("ResultStruct", "name link description")		
 			searchResults = []
-
 
 			try: 
 				pages, pagerank = db.fetch_web_links_multi(querys)
