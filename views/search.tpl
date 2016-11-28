@@ -9,40 +9,50 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell--6-col mdl-cell--1-offset">
 
-			<!-- Calculator -->
 <%
-			import re
-			import requests
+			if start is None or str(start) is '':
+				start = 0
+			end
 
-			match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+			start = int(start)
 
-			if match: 
-				val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})
-				if not "Error: Undefined symbol" in val.text:
-					params = {'ans': val.text, 'query':query + ' ='}
+	#Calculator 
+
+			if start == 0:
+				import re
+				import requests
+
+				match = re.match( r'((\d*)\s*([\+\-\/\*^e%])\s*(\d*))|(log(.*))|sin(.*)|cos(.*)|tan(.*)|sec(.*)|cosec(.*)|cot(.*)|ln(.*)', query)
+				
+				if match: 
+					val = requests.get("http://api.mathjs.org/v1/", params={'expr': query})
+					if not "Error: Undefined symbol" in val.text:
+						params = {'ans': val.text, 'query':query + ' ='}
+						include('calculator.tpl', **params)
+					end
+				elif query == "calculator":
+					params = {'ans': "0", 'query':""}
 					include('calculator.tpl', **params)
 				end
-			elif query == "calculator":
-				params = {'ans': "0", 'query':""}
-				include('calculator.tpl', **params)
 			end
 
-%>
 
-<% 
-			if query == "weather":
-				include('weather.tpl')
+	#Weather
+
+			if start == 0:
+				if query == "weather":
+					include('weather.tpl')
+				end
 			end
-%>
 
-<%
+	#Search Results
+
 			import database as db
 			import urllib
 			from bottle import *
 			from collections import namedtuple		 			
 			ResultStruct = namedtuple("ResultStruct", "name link description")		
 			searchResults = []
-
 
 			try: 
 				pages, pagerank = db.fetch_web_links_multi(querys)
@@ -56,12 +66,6 @@
 				end
 
 				tot_results = len(searchResults)-1
-
-				if start is None or str(start) is '':
-					start = 0
-				end
-
-				start = int(start)
 
 				max_pg = tot_results/10
 				current = start/10
