@@ -11,7 +11,7 @@ import httplib2
 import re
 from apiclient.discovery import build
 import gviz_api
-
+import spellcheck as sp
 
 session_opts = {
     'session.type': 'file',
@@ -70,9 +70,8 @@ def search():
 			db.update_entry(query.strip(), 1, params['id'])
 		params['query'] = query
 		params['start'] = start
-
 		params['results'] = None
-
+		params['corrected'] = sp.correct_query(query)
 		return template('search.tpl', **params)
 	else:
 		querys = re.findall(r'\S+', query)
@@ -84,6 +83,7 @@ def search():
 		params['querys']=queryCount
 		params['query']=query
 		params['start'] = start
+		params['corrected'] = sp.correct_query(query)
 		return template('search.tpl', **params)
 
 #Handles the login

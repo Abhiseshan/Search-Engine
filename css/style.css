@@ -522,6 +522,15 @@ p.result-link-description {
     margin-top: 20px;
 }
 
+.spell_check {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.spell_check a {
+    color: blue;
+}
+
 /********************************************* screen response **************************************/
 
 @media (min-width: 544px) {

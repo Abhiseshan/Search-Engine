@@ -9,6 +9,11 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell--6-col mdl-cell--1-offset-desktop mdl-cell--1-offset-tablet mobile-result">
 
+			<!-- Spellcheck -->
+			%if corrected != query.strip() and str(start) is '':
+				<div class="spell_check">Did you mean <a href="search?q={{corrected}}">{{corrected}}</a></div>
+			%end
+
 <%
 			if start is None or str(start) is '':
 				start = 0
