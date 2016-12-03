@@ -44,7 +44,8 @@
 					include('weather.tpl')
 				end
 			end
-
+	#<----------------------------------------------------------------------------------------------		
+	#problem is here?
 	#Game
 			if start == 0:
 				if query == "nocowlevel":
