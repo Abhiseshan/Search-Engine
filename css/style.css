@@ -391,19 +391,26 @@ p.result-link-description {
 }
 
 .pagination li {
+
     display: inline;
     padding: 8px;
 }
 
-.pagination a {
-    font-size: 1.4em;
-    text-decoration: none;
+.pagination li a {
     color: blue;
+    float: left;
+    font-size: 1.4em;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
 }
 
-.pagination .active a {
+.pagination .active a{
+    background-color: #ddd;
     color: red;
 }
+
+.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 /********************************************* misc **************************************/
 
