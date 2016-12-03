@@ -45,6 +45,13 @@
 				end
 			end
 
+	#Game
+			if start == 0:
+				if query == "nocowlevel":
+					include('game.tpl')
+				end
+			end
+
 	#Search Results
 
 			import database as db
@@ -79,7 +86,7 @@
 					params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
 	 				include('search_result.tpl', **params)
 	 			end
-	 		else:
+	 		elif query != "nocowlevel":
 %>
 
 			<p>Your search - <b>{{query}} </b>- did not match any documents.</p>
