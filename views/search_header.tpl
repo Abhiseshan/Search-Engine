@@ -1,11 +1,12 @@
 <div class="header-container search-header-container">
 	<div class="header mdl-grid">
-		<div class="mdl-cell--1-col">
-			<div class="search-logo">
-				<a href="/"><img src="images/banora_small.png" /></a>
-			</div>
+		<div class="mdl-cell--1-col search_logo_desktop">
+			<a href="/"><div class="search-logo" ></div></a>
 		</div>
-		<div class="mdl-cell--6-col">
+		<div class="mdl-cell--6-col search_logo_mobile center">
+			<a href="/"><div class="search-logo-mobile" ></div></a>
+		</div>
+		<div class="mdl-cell--6-col center">
 			<form class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
 			   		<input placeholder="Search" value="{{query}}" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">

@@ -42,13 +42,13 @@
   	% currentWeather = w.getWeatherInfo()
   	% weatherList, dateList = w.getExtendedWeatherInfo()
   	<div class="weather-container mdl-card mdl-shadow--2dp">
-		<h4 class="location">{{currentWeather['location']}}</h4>
-		<div class="desc">{{currentWeather['desc']}}</div>
- 		<div class="currentWeather-container">
+		  <h4 class="location">{{currentWeather['location']}}</h4>
+		  <div class="desc">{{currentWeather['desc']}}</div>
+ 		  <div class="currentWeather-container">
 	  		<!--<div class="icon"><img src="/images/ic_weather/{{currentWeather['icon']}}.png"></div>-->
 	  		<div class="curr_temp">{{currentWeather['temp']}}C</div>
 	  	</div>
-		<div id="chart_div" style="width: 100%; height: 130px;"></div>
+		  <div id="chart_div" style="width: 100%; height: 130px;"></div>
 	  	<div class="days_container">
   			%for date in dateList:
   				<div class="weather-day">
@@ -58,7 +58,7 @@
   					<div class="max_min" style="text-align: center;">{{weatherList[date]['temp_min']}}°C</div>
   				</div>
   			%end
- 		</div>
+ 		  </div>
   	</div>
   </body>
 </html>

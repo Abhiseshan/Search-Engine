@@ -9,6 +9,12 @@
     z-index: 10005;
 }
 
+.home-body {
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center;
+}
+
 .home-body .header-container {
     background: transparent;
     box-shadow: none;
@@ -113,13 +119,22 @@ input.search-query {
 }
 
 .search-logo {
+    background-image: url("/images/banora_small.png");
     margin-left: 15px;
     margin-right: 15px;
-    float: right
+    float: right;
+    width: 36px;
+    background-size: cover;
+    height: 36px;
 }
 
-.search-logo img {
-    height: 36px
+.search-logo-mobile {
+    background-image: url("/images/banora.png");
+    width: 100%;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .search-form {
@@ -634,3 +649,65 @@ p.result-link-description {
     background: blueviolet;
 }
 
+@media (max-width: 1300px) {
+    .calculator {
+        display: none;
+    }
+
+    .query-count-table {
+        display: none;
+    }
+
+    .pagination {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 800px) {
+    .weather-container {
+        display: none;
+    }
+    .header .login-button {
+        display: none;
+    }
+}
+
+/* Moobile Screens */
+@media (min-width: 500px) {
+    .search_logo_mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .img-credits {
+        display: none;
+    }
+
+    .header {
+        height: 96px;
+    }
+
+    .search_logo_desktop {
+        display: none;
+    }
+
+    .center {
+        margin: 0 auto;
+    }
+
+    .mobile-result {
+        padding-left: 16px;
+        padding-right: 16px;
+        width: 90%;
+    }
+
+    .mobile-result .result-link-description {
+        display: none;
+    }
+
+    p.result-link-url {
+        overflow: hidden;
+    }
+}

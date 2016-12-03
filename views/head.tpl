@@ -5,7 +5,8 @@
 
   	<title>Banora</title>
   	<meta name="description" content="The project for 326">
-  	<meta name="author" content="Abhinav & Kartikay">
+  	<meta name="author" content="Abhinav, Kartikay and Ronald">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
   	<!-- Style Sheets -->
   	<link rel="stylesheet" href="css/material.css?v=1.0">
@@ -17,5 +18,4 @@
 	
 	<!-- Fonts -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 </head>

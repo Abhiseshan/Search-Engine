@@ -7,7 +7,7 @@
 
 	<div class="search-results-container">
 		<div class="mdl-grid">
-			<div class="mdl-cell--6-col mdl-cell--1-offset">
+			<div class="mdl-cell--6-col mdl-cell--1-offset-desktop mdl-cell--1-offset-tablet mobile-result">
 
 <%
 			if start is None or str(start) is '':
@@ -121,7 +121,7 @@
 
 		%if not pages is None: 
 		<nav class="mdl-grid">
-		    <ul class="pagination mdl-cell--1-offset">
+		    <ul class="pagination mdl-cell--1-offset-desktop mdl-cell--1-offset-tablet">
 		        <!--Arrow left-->
 		        <li class="page-item">
 		            <a class="page-link" aria-label="Previous">
