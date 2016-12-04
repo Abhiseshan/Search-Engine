@@ -19,7 +19,7 @@
 }
 
 input.search-query {
-    padding: 8px 48px 8px 24px !important;
+    padding: 8px 68px 8px 24px !important;
 }
 
 .header {
@@ -150,14 +150,14 @@ input.search-query {
 }
 
 .search-enter {
-    color: #fff;
+    background-color: transparent;
     right: 0;
     position: absolute;
     top: 0;
     padding: 6px 8px 6px 8px;
     border-radius: 0 2px 2px 0;
     transition: color .2s;
-    background-color: tomato;
+    color: tomato;
     border: none;
     width: 40px;
     height: 100%
@@ -168,7 +168,29 @@ input.search-query {
 }
 
 .search-enter:hover {
-    background-color: mediumpurple;
+    color: mediumpurple;
+}
+
+.search-voice {
+    background-color: transparent;
+    right: 30px;
+    position: absolute;
+    top: 0;
+    padding: 6px 8px 6px 8px;
+    border-radius: 0 2px 2px 0;
+    transition: color .2s;
+    color: tomato;
+    border: none;
+    width: 40px;
+    height: 100%
+}
+
+.search-voice::before {
+    content: 'mic'
+}
+
+.search-voice:hover {
+    color: mediumpurple;
 }
 
 .search-active .search-image {

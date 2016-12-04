@@ -9,6 +9,7 @@
 			<form class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
 			   		<input placeholder="Search" value="{{query}}" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+					<button onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" class="search-voice material-icons"></button>
 		        	<input type="submit" value="search" class="search-enter material-icons">
 			    </div>
 		    </form>

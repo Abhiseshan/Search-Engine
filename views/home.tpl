@@ -22,59 +22,15 @@
 
 	<div class="home-container">
 		<div class="main-logo">
-				<img id = "logo" onclick="playAnim()" src="images/banora.png" />
-
-			<script>
-  				function playAnim() {
-
-  					if (document.getElementById('logo').src.indexOf("images/banora.png") != -1 ){
- 						document.getElementById('logo').src = 'images/banora.gif'; 
-  					}
-
-  					else{
-  						document.getElementById('logo').src = 'images/banora.png'; 
-  					}
-
-  				}
-			</script>
-
+			<img id = "logo" onclick="playAnim()" src="images/banora.png" />
 		</div>
+
 		<div class="search-wrapper home-page-search-wrapper">
 			<form id= "mySearch" class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
-			   		<input id= "myInput" placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
-		        	
-				<img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" >
-				<input type="submit" value="search" class="search-enter material-icons">
-
-		        	<!-- HTML5 Speech Recognition API -->
-					<script>
-  					function startDictation() {
- 
-    				if (window.hasOwnProperty('webkitSpeechRecognition')) {
- 
-      				var recognition = new webkitSpeechRecognition();
- 
-      				recognition.continuous = false;
-      				recognition.interimResults = false;
- 
-      				recognition.lang = "en-US";
-      				recognition.start();
- 
-      				recognition.onresult = function(e) {
-        			document.getElementById('myInput').value
-                                 = e.results[0][0].transcript;
-        				recognition.stop();
-        				document.getElementById('mySearch').submit();
-      				};
- 
-      				recognition.onerror = function(e) {
-        				recognition.stop();
-      				}
- 
-    				}
-  					}
-					</script>
+			   		<input id= "myInput" placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">	        	
+					<button onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" class="search-voice material-icons"></button>
+					<input type="submit" value="search" class="search-enter material-icons">
 			    </div>
 		    </form>
 		</div>

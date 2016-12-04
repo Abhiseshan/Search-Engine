@@ -10,3 +10,36 @@ function toggle_visibility(id) {
    else
       e.style.display = 'block';
 }
+
+function startDictation() {
+	if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+		var recognition = new webkitSpeechRecognition();
+
+		recognition.continuous = false;
+		recognition.interimResults = false;
+
+		recognition.lang = "en-US";
+		recognition.start();
+
+		recognition.onresult = function(e) {
+			document.getElementById('myInput').value = e.results[0][0].transcript;
+			recognition.stop();
+			document.getElementById('mySearch').submit();
+		};
+
+		recognition.onerror = function(e) {
+			recognition.stop();
+		}
+	}
+}
+
+function playAnim() {
+	if (document.getElementById('logo').src.indexOf("images/banora.png") != -1 ){
+		document.getElementById('logo').src = 'images/banora.gif'; 
+	}
+
+	else{
+		document.getElementById('logo').src = 'images/banora.png'; 
+	}
+}
