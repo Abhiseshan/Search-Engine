@@ -142,7 +142,7 @@ game.prototype.redraw_world = function()
 	img = img_res('tree.png');
 	this.ctx.drawImage(img,  (w/2 - 4.5) * this.scale , h/2 , 10 * this.scale, this.canvas_height);
 	
-	write_text({x : 25 , y : 25 , font : 'bold 15px arial' , color : '#fff' , text : 'Fruits ' + this.points , ctx : this.ctx})
+	write_text({x : 25 , y : 25 , font : 'bold 15px arial' , color : '#fff' , text : 'Apples: ' + this.points , ctx : this.ctx})
 	
 	//Draw each object one by one , the tiles , the cars , the other objects lying here and there
 	for(var i in this.game_objects)
