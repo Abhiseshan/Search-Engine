@@ -25,9 +25,9 @@
 				<img src="images/banora.png" />
 		</div>
 		<div class="search-wrapper home-page-search-wrapper">
-			<form class="search-form" action="search" method="get">
+			<form id= "mySearch" class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
-			   		<input placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+			   		<input id= "myInput" placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
 		        	
 				<img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" >
 				<input type="submit" value="search" class="search-enter material-icons">
