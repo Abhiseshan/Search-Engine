@@ -34,6 +34,29 @@ function startDictation() {
 	}
 }
 
+function startDictationResult() {
+	if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+		var recognition = new webkitSpeechRecognition();
+
+		recognition.continuous = false;
+		recognition.interimResults = false;
+
+		recognition.lang = "en-US";
+		recognition.start();
+
+		recognition.onresult = function(e) {
+			document.getElementById('myInputResult').value = e.results[0][0].transcript;
+			recognition.stop();
+			document.getElementById('mySearchResult').submit();
+		};
+
+		recognition.onerror = function(e) {
+			recognition.stop();
+		}
+	}
+}
+
 function playAnim() {
 	if (document.getElementById('logo').src.indexOf("images/banora.png") != -1 ){
 		document.getElementById('logo').src = 'images/banora.gif'; 
