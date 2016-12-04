@@ -22,7 +22,22 @@
 
 	<div class="home-container">
 		<div class="main-logo">
-				<img src="images/banora.png" />
+				<img id = "logo" onclick="playAnim()" src="images/banora.png" />
+
+			<script>
+  				function playAnim() {
+
+  					if (document.getElementById('logo').src.indexOf("images/banora.png") != -1 ){
+ 						document.getElementById('logo').src = 'images/banora.gif'; 
+  					}
+
+  					else{
+  						document.getElementById('logo').src = 'images/banora.png'; 
+  					}
+
+  				}
+			</script>
+
 		</div>
 		<div class="search-wrapper home-page-search-wrapper">
 			<form id= "mySearch" class="search-form" action="search" method="get">
