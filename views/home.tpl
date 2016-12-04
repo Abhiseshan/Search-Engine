@@ -28,7 +28,38 @@
 			<form class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
 			   		<input placeholder="Search" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
-		        	<input type="submit" value="search" class="search-enter material-icons">
+		        	
+				<img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" >
+				<input type="submit" value="search" class="search-enter material-icons">
+
+		        	<!-- HTML5 Speech Recognition API -->
+					<script>
+  					function startDictation() {
+ 
+    				if (window.hasOwnProperty('webkitSpeechRecognition')) {
+ 
+      				var recognition = new webkitSpeechRecognition();
+ 
+      				recognition.continuous = false;
+      				recognition.interimResults = false;
+ 
+      				recognition.lang = "en-US";
+      				recognition.start();
+ 
+      				recognition.onresult = function(e) {
+        			document.getElementById('myInput').value
+                                 = e.results[0][0].transcript;
+        				recognition.stop();
+        				document.getElementById('mySearch').submit();
+      				};
+ 
+      				recognition.onerror = function(e) {
+        				recognition.stop();
+      				}
+ 
+    				}
+  					}
+					</script>
 			    </div>
 		    </form>
 		</div>
