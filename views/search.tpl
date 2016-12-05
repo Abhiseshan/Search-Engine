@@ -153,7 +153,7 @@
 			        		%else:
 			        			%active=""
 			        		%end
-			        		<li class="page-item {{active}}"><a href="{{url_i}}">{{i+1}}</a></li>
+			        		<li class="page-item {{active}} pg-number"><a href="{{url_i}}">{{i+1}}</a></li>
 			        	%end
 			        %end
 		        <!--Arrow right-->
