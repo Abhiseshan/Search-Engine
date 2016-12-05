@@ -49,6 +49,14 @@
 					include('weather.tpl')
 				end
 			end
+	#<----------------------------------------------------------------------------------------------		
+	#problem is here?
+	#Game
+			if start == 0:
+				if query == "nocowlevel":
+					include('game.tpl')
+				end
+			end
 
 	#Search Results
 
@@ -84,7 +92,7 @@
 					params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
 	 				include('search_result.tpl', **params)
 	 			end
-	 		else:
+	 		elif query != "nocowlevel":
 %>
 
 			<p>Your search - <b>{{query}} </b>- did not match any documents.</p>
@@ -129,7 +137,11 @@
 		    <ul class="pagination mdl-cell--1-offset-desktop mdl-cell--1-offset-tablet">
 		        <!--Arrow left-->
 		        <li class="page-item">
-		            <a class="page-link" aria-label="Previous">
+		       		%url_i = url + "0"
+			        %if current != 0:
+			        	%url_i  = url + str(current-1) + "0"
+			        %end
+		            <a href="{{url_i}}" class="page-link" aria-label="Previous">
 		                <span aria-hidden="true">&laquo;</span>
 		            </a>
 		        </li>
@@ -146,7 +158,11 @@
 			        %end
 		        <!--Arrow right-->
 		        <li class="page-item">
-		            <a class="page-link" aria-label="Next">
+		        	%url_i = url + str(max_pg) + "0"
+			        %if current != max_pg:
+			        	%url_i = url + str(current+1) + "0"
+			        %end
+		            <a href="{{url_i}}" class="page-link" aria-label="Next">
 		                <span aria-hidden="true">&raquo;</span>
 		            </a>
 		        </li>

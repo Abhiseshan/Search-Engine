@@ -6,10 +6,11 @@
 		<div class="mdl-cell--6-col search_logo_mobile center">
 			<a href="/"><div class="search-logo-mobile" ></div></a>
 		</div>
-		<div class="mdl-cell--6-col center">
-			<form class="search-form" action="search" method="get">
+		<div class="mdl-cell--6-col">
+			<form id= "mySearchResult" class="search-form" action="search" method="get">
 			   	<div id="searchbox" class="searchbox">
-			   		<input placeholder="Search" value="{{query}}" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+			   		<input id= "myInputResult" placeholder="Search" value="{{query}}" type="text" class="search-field search-query search-query" name="q" value="" autocomplete="off">
+					<button  type=button onclick="startDictationResult()" class="search-voice material-icons"></button>
 		        	<input type="submit" value="search" class="search-enter material-icons">
 			    </div>
 		    </form>
