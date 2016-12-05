@@ -52,6 +52,3 @@ def correct_query(query):
 		corrected += (correct(words.strip()) + " ")
 
 	return corrected.strip()
-
-print "this art" == correct_query("this art")
-print correct_query("this art")
