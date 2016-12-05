@@ -49,8 +49,6 @@
 					include('weather.tpl')
 				end
 			end
-	#<----------------------------------------------------------------------------------------------		
-	#problem is here?
 	#Game
 			if start == 0:
 				if query == "nocowlevel":
@@ -87,11 +85,11 @@
 
 				pageSearchResults = [searchResults[i:i+10] for i in range(0,len(searchResults),10)]
 
-
-				for result in pageSearchResults[current]:
-					params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
-	 				include('search_result.tpl', **params)
-	 			end
+				if pageSearchResults:
+					for result in pageSearchResults[current]:
+						params = {'link_name':result.name, 'link_url':result.link, 'link_description':result.description}
+		 				include('search_result.tpl', **params)
+		 			end
 	 		elif query != "nocowlevel":
 %>
 
@@ -108,7 +106,7 @@
 			<!-- implement python for loop to loop throuh the search results and display them using the search display template -->
 
 			</div>
-			%if logged_in:
+			%if logged_in and query != "nocowlevel":
 			<div class="query-count-table mdl-cell--4-col" style="margin: 0 auto">
 				<table class="mdl-data-table mdl-js-data-table" style="width: 100%" id="results">
 					<thead>
@@ -132,7 +130,7 @@
 			%end
 		</div>
 
-		%if not pages is None: 
+		%if pages and pageSearchResults: 
 		<nav class="mdl-grid">
 		    <ul class="pagination mdl-cell--1-offset-desktop mdl-cell--1-offset-tablet">
 		        <!--Arrow left-->
