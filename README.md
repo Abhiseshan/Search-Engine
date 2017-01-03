@@ -17,7 +17,9 @@ The crawler and page rank implementation can be found at https://github.com/kart
 
 ##Contributors##
 Abhinav Rajaseshan - github.com/Abhiseshan/
+
 Kartikay Goyle - https://github.com/kartikay18
+
 Ron Ng - https://github.com/NewFate
 
 ##File Orginization##
