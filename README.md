@@ -4,6 +4,17 @@ This is the front end of the Banora Search Engine created as the course project 
 
 The crawler and page rank implementation can be found at https://github.com/kartikay18/Ello 
 
+##Features##
+ * Seach querys generated using Page Rank Algorithm
+ * Mobile friendly site.
+ * A Game - search ‘nocowlevel’ (a popular game reference) and you can play a simple game. Controls are up, left, right keys.
+ * Calculator - search the mathematical query or just search ‘calculator’.
+ * Weather - search ‘weather’. 
+ * Google doodle like logo animation - click on the large logo on the homepage to play/pause.
+ * Voice search - click the voice icon on the search bar, say your query and it will search automatically. 
+ * Spell check - provides a recommendation if a word cannot be found. 
+ * Shown in “Did you mean <word(s)>”
+
 ##Contributors##
 Abhinav Rajaseshan - github.com/Abhiseshan/
 Kartikay Goyle - https://github.com/kartikay18
