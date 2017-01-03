@@ -16,7 +16,7 @@ The crawler and page rank implementation can be found at https://github.com/kart
  * Shown in “Did you mean <word(s)>”
 
 ##Contributors##
-Abhinav Rajaseshan - github.com/Abhiseshan/
+Abhinav Rajaseshan - https://github.com/Abhiseshan/
 
 Kartikay Goyle - https://github.com/kartikay18
 
